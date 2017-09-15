@@ -1,0 +1,436 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+    <Schema Namespace="DICEModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="Dice">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" Nullable="false" />
+          <Property Name="Face" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Game">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="FirstPlayerId" Type="int" Nullable="false" />
+          <Property Name="SecondPlayerId" Type="int" />
+          <Property Name="StartTime" Type="date" Nullable="false" />
+          <Property Name="EndTime" Type="date" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Player">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="UserName" Type="varchar" MaxLength="20" Nullable="false" />
+          <Property Name="FirstName" Type="varchar" MaxLength="20" Nullable="false" />
+          <Property Name="LastName" Type="varchar" MaxLength="20" />
+          <Property Name="PasswordHash" Type="varchar" MaxLength="150" Nullable="false" />
+        </EntityType>
+        <EntityType Name="PlayerSession">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="PlayerId" Type="int" Nullable="false" />
+          <Property Name="Token" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="EndTime" Type="date" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Step">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="GameId" Type="int" Nullable="false" />
+          <Property Name="UserId" Type="int" Nullable="false" />
+          <Property Name="FirstDice" Type="int" Nullable="false" />
+          <Property Name="SecondDice" Type="int" Nullable="false" />
+        </EntityType>
+        <Association Name="FK__Game__FirstPlaye__286302EC">
+          <End Role="Player" Type="Self.Player" Multiplicity="1" />
+          <End Role="Game" Type="Self.Game" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Player">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Game">
+              <PropertyRef Name="FirstPlayerId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Game__SecondPlay__29572725">
+          <End Role="Player" Type="Self.Player" Multiplicity="0..1" />
+          <End Role="Game" Type="Self.Game" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Player">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Game">
+              <PropertyRef Name="SecondPlayerId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__PlayerSes__Playe__25869641">
+          <End Role="Player" Type="Self.Player" Multiplicity="1" />
+          <End Role="PlayerSession" Type="Self.PlayerSession" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Player">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="PlayerSession">
+              <PropertyRef Name="PlayerId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Step__FirstDice__30F848ED">
+          <End Role="Dice" Type="Self.Dice" Multiplicity="1" />
+          <End Role="Step" Type="Self.Step" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Dice">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Step">
+              <PropertyRef Name="FirstDice" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Step__GameId__2F10007B">
+          <End Role="Game" Type="Self.Game" Multiplicity="1" />
+          <End Role="Step" Type="Self.Step" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Game">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Step">
+              <PropertyRef Name="GameId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Step__SecondDice__31EC6D26">
+          <End Role="Dice" Type="Self.Dice" Multiplicity="1" />
+          <End Role="Step" Type="Self.Step" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Dice">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Step">
+              <PropertyRef Name="SecondDice" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Step__UserId__300424B4">
+          <End Role="Player" Type="Self.Player" Multiplicity="1" />
+          <End Role="Step" Type="Self.Step" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Player">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Step">
+              <PropertyRef Name="UserId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="DICEModelStoreContainer">
+          <EntitySet Name="Dice" EntityType="Self.Dice" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Game" EntityType="Self.Game" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Player" EntityType="Self.Player" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="PlayerSession" EntityType="Self.PlayerSession" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Step" EntityType="Self.Step" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK__Game__FirstPlaye__286302EC" Association="Self.FK__Game__FirstPlaye__286302EC">
+            <End Role="Player" EntitySet="Player" />
+            <End Role="Game" EntitySet="Game" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Game__SecondPlay__29572725" Association="Self.FK__Game__SecondPlay__29572725">
+            <End Role="Player" EntitySet="Player" />
+            <End Role="Game" EntitySet="Game" />
+          </AssociationSet>
+          <AssociationSet Name="FK__PlayerSes__Playe__25869641" Association="Self.FK__PlayerSes__Playe__25869641">
+            <End Role="Player" EntitySet="Player" />
+            <End Role="PlayerSession" EntitySet="PlayerSession" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Step__FirstDice__30F848ED" Association="Self.FK__Step__FirstDice__30F848ED">
+            <End Role="Dice" EntitySet="Dice" />
+            <End Role="Step" EntitySet="Step" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Step__GameId__2F10007B" Association="Self.FK__Step__GameId__2F10007B">
+            <End Role="Game" EntitySet="Game" />
+            <End Role="Step" EntitySet="Step" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Step__SecondDice__31EC6D26" Association="Self.FK__Step__SecondDice__31EC6D26">
+            <End Role="Dice" EntitySet="Dice" />
+            <End Role="Step" EntitySet="Step" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Step__UserId__300424B4" Association="Self.FK__Step__UserId__300424B4">
+            <End Role="Player" EntitySet="Player" />
+            <End Role="Step" EntitySet="Step" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema></edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="DICEModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityContainer Name="DICEEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="Dices" EntityType="DICEModel.Dice" />
+          <EntitySet Name="Games" EntityType="DICEModel.Game" />
+          <EntitySet Name="Players" EntityType="DICEModel.Player" />
+          <EntitySet Name="PlayerSessions" EntityType="DICEModel.PlayerSession" />
+          <EntitySet Name="Steps" EntityType="DICEModel.Step" />
+          <AssociationSet Name="FK__Step__FirstDice__30F848ED" Association="DICEModel.FK__Step__FirstDice__30F848ED">
+            <End Role="Dice" EntitySet="Dices" />
+            <End Role="Step" EntitySet="Steps" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Step__SecondDice__31EC6D26" Association="DICEModel.FK__Step__SecondDice__31EC6D26">
+            <End Role="Dice" EntitySet="Dices" />
+            <End Role="Step" EntitySet="Steps" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Game__FirstPlaye__286302EC" Association="DICEModel.FK__Game__FirstPlaye__286302EC">
+            <End Role="Player" EntitySet="Players" />
+            <End Role="Game" EntitySet="Games" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Game__SecondPlay__29572725" Association="DICEModel.FK__Game__SecondPlay__29572725">
+            <End Role="Player" EntitySet="Players" />
+            <End Role="Game" EntitySet="Games" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Step__GameId__2F10007B" Association="DICEModel.FK__Step__GameId__2F10007B">
+            <End Role="Game" EntitySet="Games" />
+            <End Role="Step" EntitySet="Steps" />
+          </AssociationSet>
+          <AssociationSet Name="FK__PlayerSes__Playe__25869641" Association="DICEModel.FK__PlayerSes__Playe__25869641">
+            <End Role="Player" EntitySet="Players" />
+            <End Role="PlayerSession" EntitySet="PlayerSessions" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Step__UserId__300424B4" Association="DICEModel.FK__Step__UserId__300424B4">
+            <End Role="Player" EntitySet="Players" />
+            <End Role="Step" EntitySet="Steps" />
+          </AssociationSet>
+        </EntityContainer>
+        <EntityType Name="Dice">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" />
+          <Property Name="Face" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Steps" Relationship="DICEModel.FK__Step__FirstDice__30F848ED" FromRole="Dice" ToRole="Step" />
+          <NavigationProperty Name="Steps1" Relationship="DICEModel.FK__Step__SecondDice__31EC6D26" FromRole="Dice" ToRole="Step" />
+        </EntityType>
+        <EntityType Name="Game">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="FirstPlayerId" Type="Int32" Nullable="false" />
+          <Property Name="SecondPlayerId" Type="Int32" />
+          <Property Name="StartTime" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="EndTime" Type="DateTime" Nullable="false" Precision="0" />
+          <NavigationProperty Name="Player" Relationship="DICEModel.FK__Game__FirstPlaye__286302EC" FromRole="Game" ToRole="Player" />
+          <NavigationProperty Name="Player1" Relationship="DICEModel.FK__Game__SecondPlay__29572725" FromRole="Game" ToRole="Player" />
+          <NavigationProperty Name="Steps" Relationship="DICEModel.FK__Step__GameId__2F10007B" FromRole="Game" ToRole="Step" />
+        </EntityType>
+        <EntityType Name="Player">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="UserName" Type="String" Nullable="false" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="FirstName" Type="String" Nullable="false" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="LastName" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="PasswordHash" Type="String" Nullable="false" MaxLength="150" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="Games" Relationship="DICEModel.FK__Game__FirstPlaye__286302EC" FromRole="Player" ToRole="Game" />
+          <NavigationProperty Name="Games1" Relationship="DICEModel.FK__Game__SecondPlay__29572725" FromRole="Player" ToRole="Game" />
+          <NavigationProperty Name="PlayerSessions" Relationship="DICEModel.FK__PlayerSes__Playe__25869641" FromRole="Player" ToRole="PlayerSession" />
+          <NavigationProperty Name="Steps" Relationship="DICEModel.FK__Step__UserId__300424B4" FromRole="Player" ToRole="Step" />
+        </EntityType>
+        <EntityType Name="PlayerSession">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="PlayerId" Type="Int32" Nullable="false" />
+          <Property Name="Token" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="EndTime" Type="DateTime" Nullable="false" Precision="0" />
+          <NavigationProperty Name="Player" Relationship="DICEModel.FK__PlayerSes__Playe__25869641" FromRole="PlayerSession" ToRole="Player" />
+        </EntityType>
+        <EntityType Name="Step">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="GameId" Type="Int32" Nullable="false" />
+          <Property Name="UserId" Type="Int32" Nullable="false" />
+          <Property Name="FirstDice" Type="Int32" Nullable="false" />
+          <Property Name="SecondDice" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Dice" Relationship="DICEModel.FK__Step__FirstDice__30F848ED" FromRole="Step" ToRole="Dice" />
+          <NavigationProperty Name="Dice1" Relationship="DICEModel.FK__Step__SecondDice__31EC6D26" FromRole="Step" ToRole="Dice" />
+          <NavigationProperty Name="Game" Relationship="DICEModel.FK__Step__GameId__2F10007B" FromRole="Step" ToRole="Game" />
+          <NavigationProperty Name="Player" Relationship="DICEModel.FK__Step__UserId__300424B4" FromRole="Step" ToRole="Player" />
+        </EntityType>
+        <Association Name="FK__Step__FirstDice__30F848ED">
+          <End Type="DICEModel.Dice" Role="Dice" Multiplicity="1" />
+          <End Type="DICEModel.Step" Role="Step" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Dice">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Step">
+              <PropertyRef Name="FirstDice" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Step__SecondDice__31EC6D26">
+          <End Type="DICEModel.Dice" Role="Dice" Multiplicity="1" />
+          <End Type="DICEModel.Step" Role="Step" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Dice">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Step">
+              <PropertyRef Name="SecondDice" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Game__FirstPlaye__286302EC">
+          <End Type="DICEModel.Player" Role="Player" Multiplicity="1" />
+          <End Type="DICEModel.Game" Role="Game" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Player">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Game">
+              <PropertyRef Name="FirstPlayerId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Game__SecondPlay__29572725">
+          <End Type="DICEModel.Player" Role="Player" Multiplicity="0..1" />
+          <End Type="DICEModel.Game" Role="Game" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Player">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Game">
+              <PropertyRef Name="SecondPlayerId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Step__GameId__2F10007B">
+          <End Type="DICEModel.Game" Role="Game" Multiplicity="1" />
+          <End Type="DICEModel.Step" Role="Step" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Game">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Step">
+              <PropertyRef Name="GameId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__PlayerSes__Playe__25869641">
+          <End Type="DICEModel.Player" Role="Player" Multiplicity="1" />
+          <End Type="DICEModel.PlayerSession" Role="PlayerSession" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Player">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="PlayerSession">
+              <PropertyRef Name="PlayerId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Step__UserId__300424B4">
+          <End Type="DICEModel.Player" Role="Player" Multiplicity="1" />
+          <End Type="DICEModel.Step" Role="Step" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Player">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Step">
+              <PropertyRef Name="UserId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="DICEModelStoreContainer" CdmEntityContainer="DICEEntities">
+          <EntitySetMapping Name="Dices">
+            <EntityTypeMapping TypeName="DICEModel.Dice">
+              <MappingFragment StoreEntitySet="Dice">
+                <ScalarProperty Name="Face" ColumnName="Face" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Games">
+            <EntityTypeMapping TypeName="DICEModel.Game">
+              <MappingFragment StoreEntitySet="Game">
+                <ScalarProperty Name="EndTime" ColumnName="EndTime" />
+                <ScalarProperty Name="StartTime" ColumnName="StartTime" />
+                <ScalarProperty Name="SecondPlayerId" ColumnName="SecondPlayerId" />
+                <ScalarProperty Name="FirstPlayerId" ColumnName="FirstPlayerId" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Players">
+            <EntityTypeMapping TypeName="DICEModel.Player">
+              <MappingFragment StoreEntitySet="Player">
+                <ScalarProperty Name="PasswordHash" ColumnName="PasswordHash" />
+                <ScalarProperty Name="LastName" ColumnName="LastName" />
+                <ScalarProperty Name="FirstName" ColumnName="FirstName" />
+                <ScalarProperty Name="UserName" ColumnName="UserName" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="PlayerSessions">
+            <EntityTypeMapping TypeName="DICEModel.PlayerSession">
+              <MappingFragment StoreEntitySet="PlayerSession">
+                <ScalarProperty Name="EndTime" ColumnName="EndTime" />
+                <ScalarProperty Name="Token" ColumnName="Token" />
+                <ScalarProperty Name="PlayerId" ColumnName="PlayerId" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Steps">
+            <EntityTypeMapping TypeName="DICEModel.Step">
+              <MappingFragment StoreEntitySet="Step">
+                <ScalarProperty Name="SecondDice" ColumnName="SecondDice" />
+                <ScalarProperty Name="FirstDice" ColumnName="FirstDice" />
+                <ScalarProperty Name="UserId" ColumnName="UserId" />
+                <ScalarProperty Name="GameId" ColumnName="GameId" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="true" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

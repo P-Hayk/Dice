@@ -1,0 +1,16 @@
+<form novalidate #f="ngForm" (ngSubmit)="f.valid && login()">
+        <div class="login-form-group">
+                <input type="text" name="email" autocomplete="off" mdInput  [(ngModel)]="loginUserName"
+                 #email="ngModel" required>      
+        </div>
+
+        <div class="login-form-group">          
+                <input type="password" name="password" autocomplete="off" mdInput  [(ngModel)]="loginPass"
+                 #password="ngModel" required>      
+        </div>        
+
+        <div class="login-form-group login-button-group">
+            <button type="submit" [disabled]="!loginUserName || !loginPass" md-button color="primary">{{'login' | uppercase}}</button>
+        </div>
+
+    </form>
