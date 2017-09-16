@@ -3,6 +3,8 @@ using Microsoft.AspNet.SignalR;
 using System.Linq;
 using DiceWebAPI.Util;
 using System.Threading.Tasks;
+using Newtonsoft.Json;
+using Dice.BLL.Entities;
 
 namespace DiceWebAPI
 {
@@ -15,30 +17,28 @@ namespace DiceWebAPI
 
         public override Task OnConnected()
         {
-            string name = Context.User.Identity.Name;
-            int userId = int.Parse(Context.QueryString["uid"]);
-            _connections.Add(userId, Context.ConnectionId);
+            int playerId = JsonConvert.DeserializeObject<PlayerSessionDTO>(Context.RequestCookies["a"].Value).PlayerId;
+           
+            _connections.Add(playerId, Context.ConnectionId);
 
             return base.OnConnected();
         }
 
         public override Task OnDisconnected(bool stopCalled)
         {
-            string name = Context.User.Identity.Name;
-            int userId = int.Parse(Context.QueryString["uid"]);
+            int playerId = JsonConvert.DeserializeObject<PlayerSessionDTO>(Context.RequestCookies["a"].Value).PlayerId;
 
-            _connections.Remove(userId, Context.ConnectionId);
+            _connections.Remove(playerId, Context.ConnectionId);
 
             return base.OnDisconnected(stopCalled);
         }
 
         public override Task OnReconnected()
         {
-            string name = Context.User.Identity.Name;
-            int userId = int.Parse(Context.QueryString["uid"]);
-            if (!_connections.GetConnections(userId).Contains(Context.ConnectionId))
+            int playerId = JsonConvert.DeserializeObject<PlayerSessionDTO>(Context.RequestCookies["a"].Value).PlayerId;
+            if (!_connections.GetConnections(playerId).Contains(Context.ConnectionId))
             {
-                _connections.Add(userId, Context.ConnectionId);
+                _connections.Add(playerId, Context.ConnectionId);
             }
 
             return base.OnReconnected();

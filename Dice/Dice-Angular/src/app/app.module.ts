@@ -6,8 +6,19 @@ import { HttpModule } from '@angular/http';
 import { AppComponent } from './app.component';
 import { AppRoutingModule } from "app/app-routing.module";
 import { ApiRequestService } from "app/shared/api.request.service";
+import { CookieService } from "angular2-cookie/services";
+import { SignalRService } from "app/shared/signalR.service";
+import { SignalRConfiguration, SignalRModule } from "ng2-signalr";
 
-
+// v2.0.0
+export function createConfig(): SignalRConfiguration {
+  const c = new SignalRConfiguration();
+  c.hubName = 'gameHub';
+  c.url = "http://localhost:52945/signalr";
+  c.jsonp = true;
+  c.logging = true;
+  return c;
+}
 @NgModule({
   declarations: [
     AppComponent
@@ -16,9 +27,10 @@ import { ApiRequestService } from "app/shared/api.request.service";
     BrowserModule,
     FormsModule,
     HttpModule,
-    AppRoutingModule
+    AppRoutingModule,
+    SignalRModule.forRoot(createConfig)
   ],
-  providers: [ApiRequestService],
+  providers: [ApiRequestService,CookieService,SignalRService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

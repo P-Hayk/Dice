@@ -43,11 +43,50 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
+    <None Include=".angular-cli.json" />
+    <None Include=".editorconfig" />
+    <None Include=".gitignore" />
     <None Include="App.config" />
+    <None Include="package.json" />
+    <None Include="README.md" />
+    <None Include="src\assets\.gitkeep" />
+    <None Include="src\tsconfig.app.json" />
+    <None Include="src\tsconfig.spec.json" />
+    <None Include="tsconfig.json" />
+    <None Include="tslint.json" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="karma.conf.js" />
+    <Content Include="protractor.conf.js" />
+    <Content Include="src\app\app.component.html" />
+    <Content Include="src\app\game\game.component.html" />
+    <Content Include="src\app\login\login.component.html" />
+    <Content Include="src\favicon.ico" />
+    <Content Include="src\index.html" />
+    <Content Include="src\styles.css" />
+  </ItemGroup>
+  <ItemGroup>
+    <TypeScriptCompile Include="src\app\app-routing.module.ts" />
+    <TypeScriptCompile Include="src\app\app.component.ts" />
+    <TypeScriptCompile Include="src\app\app.module.ts" />
+    <TypeScriptCompile Include="src\app\game\game-routing.module.ts" />
+    <TypeScriptCompile Include="src\app\game\game.component.ts" />
+    <TypeScriptCompile Include="src\app\game\game.module.ts" />
+    <TypeScriptCompile Include="src\app\login\login-routing.module.ts" />
+    <TypeScriptCompile Include="src\app\login\login.component.ts" />
+    <TypeScriptCompile Include="src\app\login\login.module.ts" />
+    <TypeScriptCompile Include="src\app\shared\api.request.service.ts" />
+    <TypeScriptCompile Include="src\app\shared\game.request.service.ts" />
+    <TypeScriptCompile Include="src\app\shared\player.request.service.ts" />
+    <TypeScriptCompile Include="src\environments\environment.prod.ts" />
+    <TypeScriptCompile Include="src\environments\environment.ts" />
+    <TypeScriptCompile Include="src\main.ts" />
+    <TypeScriptCompile Include="src\polyfills.ts" />
+    <TypeScriptCompile Include="src\test.ts" />
+    <TypeScriptCompile Include="src\typings.d.ts" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

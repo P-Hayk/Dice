@@ -15,7 +15,7 @@ export class ApiRequestService {
     private request(method: RequestMethod, path: string, body?: any): Observable<any> {
 
         // set request url
-        const url: string = `http://localhost:52944/${path}`;
+        const url: string = `http://localhost:52945/${path}`;
 
         // set request headers
         const headers: Headers = new Headers({

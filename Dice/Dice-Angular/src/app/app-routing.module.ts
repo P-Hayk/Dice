@@ -5,7 +5,12 @@ const routes: Routes = [
     {
         path: 'login',
         loadChildren: './login/login.module#LoginModule'
-    },   {
+    },
+    {
+        path: 'desk',
+        loadChildren: './desk/desk.module#DeskModule'
+    },
+    {
         path: 'game',
         loadChildren: './game/game.module#GameModule'
     },
