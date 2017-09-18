@@ -68,12 +68,6 @@
   <ItemGroup>
     <Compile Include="BLs\BaseBll.cs" />
     <Compile Include="DiceExeption.cs" />
-    <Compile Include="Entities\Dice.cs" />
-    <Compile Include="Entities\GameDTO.cs" />
-    <Compile Include="Entities\LoginDetails.cs" />
-    <Compile Include="Entities\PlayerDTO.cs" />
-    <Compile Include="Entities\PlayerSession.cs" />
-    <Compile Include="Entities\Step.cs" />
     <Compile Include="Infrastructre\BLsModule.cs" />
     <Compile Include="Interfaces\IBaseBll.cs" />
     <Compile Include="Interfaces\IDiceBll.cs" />
@@ -95,6 +89,10 @@
     <ProjectReference Include="..\Dice.DAL\Dice.DAL.csproj">
       <Project>{8fd23d22-a641-45a7-8dc0-437034391bf2}</Project>
       <Name>Dice.DAL</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Dice.DTO\Dice.DTO.csproj">
+      <Project>{FE3FA0D3-224E-447E-BE91-B263E83B0A5E}</Project>
+      <Name>Dice.DTO</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

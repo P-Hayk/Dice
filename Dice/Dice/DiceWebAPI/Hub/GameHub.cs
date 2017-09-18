@@ -4,7 +4,8 @@ using System.Linq;
 using DiceWebAPI.Util;
 using System.Threading.Tasks;
 using Newtonsoft.Json;
-using Dice.BLL.Entities;
+using Dice.DTO;
+
 
 namespace DiceWebAPI
 {

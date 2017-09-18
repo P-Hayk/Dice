@@ -1,5 +1,5 @@
 ﻿using Dice.Bll.Interfaces;
-using Dice.BLL.Entities;
+
 using DiceWebAPI.Models;
 using DiceWebAPI.Util;
 using Microsoft.AspNet.SignalR;
@@ -7,6 +7,7 @@ using Newtonsoft.Json;
 using System;
 using System.Web.Mvc;
 using System.Linq;
+using Dice.DTO;
 
 namespace DiceWebAPI.Controllers
 {

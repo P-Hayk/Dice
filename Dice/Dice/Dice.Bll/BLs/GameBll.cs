@@ -1,7 +1,7 @@
 ﻿using Dice.Bll.Interfaces;
-using Dice.BLL.Entities;
 using Dice.DAL;
 using Dice.DAL.Interfaces;
+using Dice.DTO;
 using Ninject;
 using System;
 

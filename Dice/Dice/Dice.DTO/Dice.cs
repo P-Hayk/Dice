@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Dice.BLL.Entities
+namespace Dice.DTO
 {
     public class Dice
     {

@@ -17,9 +17,7 @@ namespace DiceTest
 
         IKernel kernel;
         [TestMethod]
-        public void TestMethod1()
-        {
-
+        public void TestMethod1()       {
 
 
             kernel = new StandardKernel(new MyClass());

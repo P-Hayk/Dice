@@ -183,6 +183,7 @@
     <Compile Include="Controllers\GameController.cs" />
     <Compile Include="Controllers\MainController.cs" />
     <Compile Include="Controllers\PlayerController.cs" />
+    <Compile Include="Filter\AuthorizationAttribute.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -212,6 +213,10 @@
     <ProjectReference Include="..\Dice.Bll\Dice.Bll.csproj">
       <Project>{D7CFF20D-134F-44BA-BC78-17C03FB61B2C}</Project>
       <Name>Dice.Bll</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Dice.DTO\Dice.DTO.csproj">
+      <Project>{FE3FA0D3-224E-447E-BE91-B263E83B0A5E}</Project>
+      <Name>Dice.DTO</Name>
     </ProjectReference>
   </ItemGroup>
   <PropertyGroup>

@@ -1,5 +1,5 @@
 ﻿using Dice.Bll.Interfaces;
-using Dice.BLL.Entities;
+using Dice.DTO;
 using DiceWebAPI.Models;
 using Newtonsoft.Json;
 using System;

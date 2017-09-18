@@ -1,4 +1,5 @@
-﻿using Dice.BLL.Entities;
+﻿
+using Dice.DTO;
 
 namespace Dice.Bll.Interfaces
 {

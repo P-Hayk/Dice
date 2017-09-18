@@ -1,4 +1,5 @@
 ﻿using Dice.Bll;
+using DiceWebAPI.Filter;
 using DiceWebAPI.Models;
 using System;
 using System.Web.Http;
@@ -7,7 +8,7 @@ using System.Web.Http.Cors;
 namespace DiceWebAPI.Controllers
 {
     [EnableCors(origins: "*", headers: "*", methods: "*")]
-
+    [Authorization]
     public class MainController : ApiController
     {
 
