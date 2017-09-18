@@ -1,4 +1,4 @@
-﻿// T4 code generation is enabled for model 'C:\Users\hayk.poghosyan\documents\visual studio 2015\Projects\Dice\Dice.DAL\Dice.edmx'. 
+﻿// T4 code generation is enabled for model 'C:\David\Back_End\DiceGame\Dice\Dice\Dice.DAL\Dice.edmx'. 
 // To enable legacy code generation, change the value of the 'Code Generation Strategy' designer
 // property to 'Legacy ObjectContext'. This property is available in the Properties Window when the model
 // is open in the designer.

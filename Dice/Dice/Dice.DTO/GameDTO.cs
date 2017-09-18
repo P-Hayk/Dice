@@ -11,6 +11,7 @@ namespace Dice.DTO
         public int Id { get; set; }
         public int FirstPlayerID { get; set; }
         public int? SecondPlayerID { get; set; }
+        public DateTime CreateTime { get; set; }
         public DateTime? StartTime { get; set; }
         public DateTime? EndTime { get; set; }
     }

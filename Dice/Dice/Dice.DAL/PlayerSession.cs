@@ -17,6 +17,7 @@ namespace Dice.DAL
         public int Id { get; set; }
         public int PlayerId { get; set; }
         public string Token { get; set; }
+        public System.DateTime StartTime { get; set; }
         public System.DateTime EndTime { get; set; }
     
         public virtual Player Player { get; set; }

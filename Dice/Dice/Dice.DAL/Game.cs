@@ -23,8 +23,9 @@ namespace Dice.DAL
         public int Id { get; set; }
         public int FirstPlayerId { get; set; }
         public Nullable<int> SecondPlayerId { get; set; }
-        public System.DateTime StartTime { get; set; }
-        public System.DateTime EndTime { get; set; }
+        public System.DateTime CreateTime { get; set; }
+        public Nullable<System.DateTime> StartTime { get; set; }
+        public Nullable<System.DateTime> EndTime { get; set; }
     
         public virtual Player Player { get; set; }
         public virtual Player Player1 { get; set; }

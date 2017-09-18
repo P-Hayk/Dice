@@ -14,11 +14,25 @@ namespace Dice.DAL.Repositories
         private IStepRepository stepRepo;
         private IDiceRepository diceRepo;
         private IPlayerSessionRepository playerSessionRepo;
+        private IPlayerCommonRepository playerCommonRepo;
         private DICEEntities db;
+
+        private bool disposed = false;
         public UnitOfWork()
         {
             db = new DICEEntities();
         }
+        public IPlayerCommonRepository PlayerCommonRepo
+        {
+            get
+            {
+                if (playerCommonRepo == null)
+                    playerCommonRepo = new PlayerCommonRepository(db);
+                return playerCommonRepo;
+            }
+
+        }
+
         public IPlayerRepository PlayerRepo
         {
             get
@@ -79,7 +93,6 @@ namespace Dice.DAL.Repositories
             db.SaveChanges();
         }
 
-        private bool disposed = false;
 
         public virtual void Dispose(bool disposing)
         {

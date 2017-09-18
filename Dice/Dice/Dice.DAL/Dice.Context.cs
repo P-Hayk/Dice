@@ -28,7 +28,9 @@ namespace Dice.DAL
         public virtual DbSet<Dice> Dices { get; set; }
         public virtual DbSet<Game> Games { get; set; }
         public virtual DbSet<Player> Players { get; set; }
+        public virtual DbSet<PlayerCommon> PlayerCommons { get; set; }
         public virtual DbSet<PlayerSession> PlayerSessions { get; set; }
         public virtual DbSet<Step> Steps { get; set; }
+        public virtual DbSet<sysdiagram> sysdiagrams { get; set; }
     }
 }
