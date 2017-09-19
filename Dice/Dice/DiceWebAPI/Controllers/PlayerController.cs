@@ -36,12 +36,12 @@ namespace DiceWebAPI.Controllers
             return new BaseResponse { ResponseCode = 0, ResponseObject = plSession };
         }
 
-        private BaseResponse RegistratePlayer(PlayerDTO player)
+        private BaseResponse RegistratePlayer(PlayerDTO playerDTO)
         {
 
-            int playerID = playerBll.AddPlayer(player);
+            PlayerDTO player = playerBll.AddPlayer(playerDTO);
 
-            return new BaseResponse() { ResponseObject = playerID };
+            return new BaseResponse() { ResponseObject = player };
         }
 
     }

@@ -14,7 +14,11 @@ export class PlayerRequestService {
 
         let request = this.prepairRequest(data, "LoginPlayer");
 
-        return this.ApiRequestService.loginRequest(request);
+        return this.ApiRequestService.Request(request);
+    }
+    registrationPlayer(data:any){
+        let request = this.prepairRequest(data, "RegistratePlayer");
+        return this.ApiRequestService.Request(request);
     }
 
     private prepairRequest(data: any, method: string) {

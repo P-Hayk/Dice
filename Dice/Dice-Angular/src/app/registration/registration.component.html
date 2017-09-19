@@ -1,0 +1,29 @@
+<form novalidate #f="ngForm" (ngSubmit)="f.valid && registration()">
+    <div class="login-form-group">
+        <label>login</label>
+        <input type="text" name="email" autocomplete="off" mdInput [(ngModel)]="regUserName" #email="ngModel" required>
+    </div>
+
+    <div class="login-form-group">
+        <label>password</label>
+        <input type="password" name="password" autocomplete="off" mdInput [(ngModel)]="regPass" #password="ngModel" required>
+    </div>
+    <div class="login-form-group">
+        <label>Reapete password</label>
+        <input type="repassword" name="repassword" autocomplete="off" mdInput [(ngModel)]="regRepeatePass" #password="ngModel" required>
+    </div>
+    <div class="login-form-group">
+        <label>FirstName</label>
+        <input type="text" name="firstName" autocomplete="off" mdInput [(ngModel)]="FirstName" #firstName="ngModel" required>
+    </div>
+    <div class="login-form-group">
+        <label>LastName</label>
+        <input type="text" name="lastName" autocomplete="off" mdInput [(ngModel)]="LastName" #lastName="ngModel" required>
+    </div>
+
+
+    <div class="login-form-group login-button-group">
+        <button type="submit" [disabled]="!regUserName || !regPass" md-button color="primary">{{'login' | uppercase}}</button>
+    </div>
+
+</form>

@@ -43,7 +43,7 @@ export class ApiRequestService {
     }
 
 
-    public loginRequest(body: any) {
+    public Request(body: any) {
         return this.postRequest('api/Main', body);
     }
 }
