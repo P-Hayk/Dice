@@ -15,13 +15,17 @@ const routes: Routes = [
         loadChildren: './game/game.module#GameModule'
     },
     {
+        path: 'registration',
+        loadChildren: './registration/registration.module#RegistrationModule'
+    },
+    {
         path: '',
-        redirectTo: 'login',
+        redirectTo: 'registration',
         pathMatch: 'full'
     },
     {
         path: '**',
-        redirectTo: 'login',
+        redirectTo: 'registration',
     }
 ];
 

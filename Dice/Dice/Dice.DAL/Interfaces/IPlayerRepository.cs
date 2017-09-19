@@ -8,7 +8,7 @@ namespace Dice.DAL.Interfaces
 {
     public interface IPlayerRepository : IBaseRepository<Player>
     {
-        int Add(Player player);
+        Player Add(Player player);
         Player Get(string userName);
     }
 }

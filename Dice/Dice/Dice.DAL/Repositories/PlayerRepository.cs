@@ -15,11 +15,11 @@ namespace Dice.DAL.Repositories
         {
             this.db = context;
         }
-        public int Add(Player player)
+        public Player Add(Player player)
         {
             db.Players.Add(player);
             db.SaveChanges();
-            return player.Id;
+            return player;
         }
 
         public Player Get(int id)

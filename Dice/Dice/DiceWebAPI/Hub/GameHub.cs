@@ -18,7 +18,7 @@ namespace DiceWebAPI
 
         public override Task OnConnected()
         {
-            int playerId = JsonConvert.DeserializeObject<PlayerSessionDTO>(Context.RequestCookies["a"].Value).PlayerId;
+            int playerId = JsonConvert.DeserializeObject<PlayerSessionDTO>(Context.RequestCookies["a"].Value).Id;
            
             _connections.Add(playerId, Context.ConnectionId);
 

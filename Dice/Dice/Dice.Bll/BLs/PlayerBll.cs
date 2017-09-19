@@ -13,12 +13,18 @@ namespace Dice.Bll.BLs
         [Inject]
         public IUnitOfWork unitOfWork { get; set; }
 
-        public int AddPlayer(PlayerDTO playerDTO)
+        public PlayerDTO AddPlayer(PlayerDTO playerDTO)
         {
             ValidatePlayer(playerDTO);
+            playerDTO.IsActive = true;
             Mapper.Initialize(x => x.CreateMap<PlayerDTO, Player>());
             Player player = Mapper.Map<Player>(playerDTO);
-            return unitOfWork.PlayerRepo.Add(player);
+
+            Player response = unitOfWork.PlayerRepo.Add(player);
+            Mapper.Initialize(x => x.CreateMap<Player, PlayerDTO>());
+            PlayerDTO result = Mapper.Map<PlayerDTO>(response);
+
+            return result;
         }
 
         public PlayerSessionDTO LoginPlayer(LoginDetails input)
@@ -45,7 +51,7 @@ namespace Dice.Bll.BLs
         {
             Player player = unitOfWork.PlayerRepo.Get(playerDTO.UserName);
             if (player != null)
-                throw new DiceException("UserNameExist");
+                throw new DiceException(404,"UserNameExist");
             if (string.IsNullOrWhiteSpace(playerDTO.PasswordHash) || string.IsNullOrWhiteSpace(playerDTO.UserName) || string.IsNullOrWhiteSpace(playerDTO.FirstName))
                 throw new DiceException("InvalidPlayerInfo");
 

@@ -10,7 +10,7 @@ import { SignalRService } from "app/shared/signalR.service";
 })
 export class DeskComponent implements OnInit {
 
-con:ISignalRConnection;
+  con: ISignalRConnection;
   constructor(
     private SignalRService: SignalRService,
     private GameRequestService: GameRequestService,
@@ -19,14 +19,10 @@ con:ISignalRConnection;
   games: any = [];
 
   ngOnInit() {
-   
-
   }
+
   createGame() {
-this.con=this.SignalRService.Connection;
-
-
-
+    this.con = this.SignalRService.Connection;
     // this.con.listenFor("game").subscribe(x => {this.games.push(x),console.log(x)});
     let data =
       {
@@ -36,9 +32,7 @@ this.con=this.SignalRService.Connection;
   }
 
   joinToGame(game) {
-
     //this.SignalRService.value().listenFor("game1").subscribe(x => console.log(x)); 
-
     game.SecondPlayerID = +localStorage.getItem('Id');
     this.GameRequestService.joinToGame(game).subscribe(result => this.route.navigate(["game"]));
 

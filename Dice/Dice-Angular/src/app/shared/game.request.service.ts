@@ -14,14 +14,14 @@ export class GameRequestService {
 
         let request = this.prepairRequest(data, "CreateGame");
 
-        return this.ApiRequestService.loginRequest(request);
+        return this.ApiRequestService.Request(request);
     }
 
     joinToGame(data: any) {
         
                 let request = this.prepairRequest(data, "JoinToGame");
         
-                return this.ApiRequestService.loginRequest(request);
+                return this.ApiRequestService.Request(request);
             }
 
     private prepairRequest(data: any, method: string) {
