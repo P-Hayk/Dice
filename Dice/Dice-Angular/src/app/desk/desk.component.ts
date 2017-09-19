@@ -10,24 +10,25 @@ import { SignalRService } from "app/shared/signalR.service";
 })
 export class DeskComponent implements OnInit {
 
-con:ISignalRConnection;
+  con: ISignalRConnection;
   constructor(
     private SignalRService: SignalRService,
     private GameRequestService: GameRequestService,
     private route: Router
-  ) { }
+  ) {
+  this.con = this.SignalRService.Connection;
+    console.log('ctor');
+   
+  }
   games: any = [];
 
   ngOnInit() {
-   
+    console.log(this.con);
+    this.con.listenFor("game").subscribe(x => { this.games.push(x), console.log(x) });
 
   }
   createGame() {
-this.con=this.SignalRService.Connection;
 
-
-
-    // this.con.listenFor("game").subscribe(x => {this.games.push(x),console.log(x)});
     let data =
       {
         FirstPlayerId: localStorage.getItem('Id')

@@ -29,6 +29,7 @@ export class GameRequestService {
         let body = {
             Controller: Controller,
             Method: method,
+            Token:localStorage.getItem('token'),
             RequestObject: data
         };
         return body;
