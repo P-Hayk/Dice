@@ -26,6 +26,10 @@ namespace Dice.DAL.Repositories
         {
             throw new NotImplementedException();
         }
+        public PlayerSession GetPlayerSession(string token)
+        {
+            return db.PlayerSessions.FirstOrDefault(x => x.Token == token);
+        }
 
         public IEnumerable<PlayerSession> GetAll()
         {

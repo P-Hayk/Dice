@@ -1,20 +1,19 @@
 ﻿using Dice.Bll;
+using Dice.Bll.Interfaces;
 using DiceWebAPI.Filter;
 using DiceWebAPI.Models;
 using System;
 using System.Web.Http;
 using System.Web.Http.Cors;
-
+using System.Web.Mvc;
 
 namespace DiceWebAPI.Controllers
 {
     [EnableCors(origins: "*", headers: "*", methods: "*")]
-    //[Authorization]
     public class MainController : ApiController
     {
 
         // POST: api/Main
-        //[Authorization(ControllerContext.Request)]
         public BaseResponse Post([FromBody]BaseRequest request)
         {
             try
@@ -35,15 +34,25 @@ namespace DiceWebAPI.Controllers
         }
         private BaseResponse GetResponse(BaseRequest request)
         {
+            if (request.Method != "RegistratePlayer" && request.Method != "LoginPlayer")
+                CheckToken(request.Token);
             switch (request.Controller)
             {
                 case "Player":
                     return new PlayerController().InvokeFunction(request);
                 case "Game":
                     return new GameController().InvokeFunction(request);
+                case "Step":
+                    return new StepController().InvokeFunction(request);
 
             }
             throw new Exception();
+        }
+
+        private void CheckToken(string token)
+        {
+            //var playerSessionBll = DependencyResolver.Current.GetService<IPlayerSessionBll>();
+            //playerSessionBll.CheckToken(token);
         }
     }
 }

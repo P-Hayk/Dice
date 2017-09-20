@@ -25,7 +25,7 @@ namespace Dice.Bll.BLs
             return gameDTO;
         }
 
-        public int JoinToGame(GameDTO gameDTO)
+        public GameDTO JoinToGame(GameDTO gameDTO)
         {
             if (gameDTO.Id > 0)
             {
@@ -39,8 +39,8 @@ namespace Dice.Bll.BLs
                     throw new DiceException("GameNotFound");
                 }
                 unitOfWork.Save();
-
-                return game.Id;
+                gameDTO.Id = game.Id;
+                return gameDTO;
             }
 
             else

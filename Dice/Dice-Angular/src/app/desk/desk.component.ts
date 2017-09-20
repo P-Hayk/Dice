@@ -3,6 +3,7 @@ import { SignalR, BroadcastEventListener, SignalRConnection, ISignalRConnection 
 import { GameRequestService } from "app/shared/game.request.service";
 import { ActivatedRoute, Router } from '@angular/router';
 import { SignalRService } from "app/shared/signalR.service";
+import { DataService } from 'app/shared/data.service';
 
 @Component({
   selector: 'app-desk',
@@ -14,28 +15,38 @@ export class DeskComponent implements OnInit {
   constructor(
     private SignalRService: SignalRService,
     private GameRequestService: GameRequestService,
-    private route: Router
-  ) { }
+    private route: Router,
+    private DataService: DataService
+  ) {
+    this.SignalRService.Connection.then(x => {
+      x.listenFor("game").subscribe(x => { this.games.push(x); });
+    }
+    )
+  }
   games: any = [];
 
   ngOnInit() {
   }
 
   createGame() {
-    this.con = this.SignalRService.Connection;
-    // this.con.listenFor("game").subscribe(x => {this.games.push(x),console.log(x)});
+
     let data =
       {
-        FirstPlayerId: localStorage.getItem('Id')
+        FirstPlayerId: +localStorage.getItem('Id')
       }
-    this.GameRequestService.createGame(data).subscribe(result => this.route.navigate(["game"]));
+    this.GameRequestService.createGame(data).subscribe(result => {
+      this.DataService.setValue(result);
+    
+      this.route.navigate(["game"])
+    });
   }
 
   joinToGame(game) {
-    //this.SignalRService.value().listenFor("game1").subscribe(x => console.log(x)); 
     game.SecondPlayerID = +localStorage.getItem('Id');
-    this.GameRequestService.joinToGame(game).subscribe(result => this.route.navigate(["game"]));
-
+    this.GameRequestService.joinToGame(game).subscribe(result => {
+      this.DataService.setValue(result);
+      this.route.navigate(["game"])
+    });
   }
 
 }

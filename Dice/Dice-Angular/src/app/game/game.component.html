@@ -1,1 +1,49 @@
-<p>Game</p>
+    <style>
+        .dice_1 {
+            background-position: -5px -4px
+        }
+
+        .dice_2 {
+            background-position: -5px -107px
+        }
+
+        .dice_3 {
+            background-position: -5px -212px
+        }
+
+        .dice_4 {
+            background-position: -5px -317px
+        }
+
+        .dice_5 {
+            background-position: -5px -427px
+        }
+
+        .dice_6 {
+            background-position: -5px -535px
+        }
+
+        .dice_t {
+            background-position: -5px -651px
+        }
+
+        .dice_s {
+            background-position: -5px -763px
+        }
+
+        .dice_e {
+            background-position: -5px -876px
+        }
+
+        div {
+            background-image: url('/assets/images/dice.png');
+            background-repeat: no-repeat;
+            width: 90px;
+            height: 90px;
+        }
+    </style>
+
+    <div [ngClass]="firstdice"></div>
+    <div [ngClass]="secondice"></div>
+    <button (click)="roleDice()" >Role</button>
+

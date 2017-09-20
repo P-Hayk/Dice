@@ -1,7 +1,5 @@
 ﻿using Dice.Bll.Interfaces;
-
 using DiceWebAPI.Models;
-using DiceWebAPI.Util;
 using Microsoft.AspNet.SignalR;
 using Newtonsoft.Json;
 using System;
@@ -37,17 +35,18 @@ namespace DiceWebAPI.Controllers
         {
             var gameDto = gameBll.AddGame(gameDTO);
 
-            var context = GlobalHost.ConnectionManager.GetHubContext<GameHub>();
-            context.Clients.All.game(gameDto);
+            Hub.Clients.All.game(gameDto);
             return new BaseResponse { ResponseObject = gameDto };
         }
 
         private BaseResponse JoinToGame(GameDTO gameDTO)
         {
-            var gameID = gameBll.JoinToGame(gameDTO);
-            var conID = GameHub.Connections.GetConnections(gameDTO.FirstPlayerID).LastOrDefault();
-            Hub.Clients.Client(conID).game1(gameDTO);
-            return new BaseResponse { ResponseObject = gameID };
+            var gameDto = gameBll.JoinToGame(gameDTO);
+            var firstPlayerConID = GameHub.Connections.GetConnection(gameDTO.FirstPlayerID);
+            var secondPlayerConID = GameHub.Connections.GetConnection((int)gameDTO.SecondPlayerID);
+            Hub.Groups.Add(firstPlayerConID, gameDto.Id.ToString());
+            Hub.Groups.Add(secondPlayerConID, gameDto.Id.ToString());
+            return new BaseResponse { ResponseObject = gameDto };
         }
 
     }

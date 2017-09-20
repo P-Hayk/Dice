@@ -16,6 +16,13 @@ namespace Dice.DAL.Repositories
             this.db = context;
         }
 
+        public Step Add(Step step)
+        {
+            db.Steps.Add(step);
+            db.SaveChanges();
+            return step;
+        }
+
         public Step Get(int id)
         {
             throw new NotImplementedException();
