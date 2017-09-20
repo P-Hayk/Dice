@@ -46,6 +46,11 @@ namespace DiceWebAPI.Util
             return Enumerable.Empty<string>();
         }
 
+        public string GetConnection(T Key)
+        {
+            return GetConnections(Key).LastOrDefault();
+        }
+
         public void Remove(T key, string connectionId)
         {
             lock (_connections)

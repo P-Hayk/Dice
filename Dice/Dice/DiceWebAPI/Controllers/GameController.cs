@@ -34,7 +34,7 @@ namespace DiceWebAPI.Controllers
         private BaseResponse CreateGame(GameDTO gameDTO)
         {
             var gameDto = gameBll.AddGame(gameDTO);
-                      
+
             Hub.Clients.All.game(gameDto);
             return new BaseResponse { ResponseObject = gameDto };
         }
@@ -42,8 +42,10 @@ namespace DiceWebAPI.Controllers
         private BaseResponse JoinToGame(GameDTO gameDTO)
         {
             var gameDto = gameBll.JoinToGame(gameDTO);
-            var conID = GameHub.Connections.GetConnections(gameDTO.FirstPlayerID).LastOrDefault();
-            Hub.Clients.Client(conID).game1(gameDTO);
+            var firstPlayerConID = GameHub.Connections.GetConnection(gameDTO.FirstPlayerID);
+            var secondPlayerConID = GameHub.Connections.GetConnection((int)gameDTO.SecondPlayerID);
+            Hub.Groups.Add(firstPlayerConID, gameDto.Id.ToString());
+            Hub.Groups.Add(secondPlayerConID, gameDto.Id.ToString());
             return new BaseResponse { ResponseObject = gameDto };
         }
 

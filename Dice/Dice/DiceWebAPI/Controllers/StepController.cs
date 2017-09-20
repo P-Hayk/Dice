@@ -8,7 +8,7 @@ using System.Web.Mvc;
 
 namespace DiceWebAPI.Controllers
 {
-    public class StepController: BaseController
+    public class StepController : BaseController
     {
 
         private IStepBll stepBll;
@@ -31,9 +31,8 @@ namespace DiceWebAPI.Controllers
 
         private BaseResponse RoleDice(StepDTO stepDTO)
         {
-            // var conID = GameHub.Connections.GetConnections(stepDTO.FirstPlayerID).LastOrDefault();
             stepDTO = stepBll.RoleDice(stepDTO);
-            Hub.Clients.All.animate(stepDTO);
+            Hub.Clients.Group(stepDTO.GameId.ToString()).animate(stepDTO);
             return new BaseResponse() { ResponseObject = stepDTO };
         }
     }
