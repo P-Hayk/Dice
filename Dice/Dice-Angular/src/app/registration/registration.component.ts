@@ -42,19 +42,21 @@ export class RegistrationComponent implements OnInit, OnDestroy {
                 FirstName:this.FirstName,
                 LastName:this.LastName
             }
+        //this.cookieService.putObject('form',data);
+        this.cookieService.putObject('form','data');
+        console.log(this.cookieService.get('form'));
         this.PlayerRequestService.registrationPlayer(data).subscribe(
             result => {
                 //localStorage.setItem('token', result.ResponseObject.Token);
                 //localStorage.setItem('Id', result.ResponseObject.PlayerId);                
-                this.cookieService.putObject('a', result.ResponseObject);
+                //this.cookieService.putObject('token', result.ResponseObject);
                 if(result.ResponseCode==0)
                     this.route.navigate(['desk']);
                 else{
-                    this.cookieService.remove('a');
+                    //this.cookieService.remove('token');
                     this.route.navigate(['login']);
                 }
-
+             //this.cookieService.remove('form');
             });
     }
-
 }

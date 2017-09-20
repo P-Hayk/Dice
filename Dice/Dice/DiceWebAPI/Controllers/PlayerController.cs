@@ -41,7 +41,7 @@ namespace DiceWebAPI.Controllers
 
             PlayerDTO player = playerBll.AddPlayer(playerDTO);
 
-            return new BaseResponse() { ResponseObject = player };
+            return new BaseResponse() { ResponseCode = 0, ResponseObject = player };
         }
 
     }

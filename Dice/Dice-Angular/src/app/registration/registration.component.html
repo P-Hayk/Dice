@@ -1,4 +1,4 @@
-<form novalidate #f="ngForm" (ngSubmit)="f.valid && registration()">
+<form novalidate #form="ngForm" (ngSubmit)="form.valid && registration()">
     <div class="login-form-group">
         <label>login</label>
         <input type="text" name="email" autocomplete="off" mdInput [(ngModel)]="regUserName" #email="ngModel" required>

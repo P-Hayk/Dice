@@ -20,18 +20,21 @@ export class ApiRequestService {
         // set request headers
         const headers: Headers = new Headers({
             'Accept': 'application/json',
-            'Content-Type': 'application/json'
+            'Content-Type': 'application/json',
         });
 
         const options: RequestOptions = new RequestOptions({
             url: url,
             method: method,
-            headers: headers
+            headers: headers,
+            //withCredentials: true 
         });
 
         if (!_.isUndefined(body)) {
             options.body = JSON.stringify(body);
         }
+        
+        //headers.set('Authorization',JSON.stringify(body.RequestObject));
 
         const request = new Request(options);
 

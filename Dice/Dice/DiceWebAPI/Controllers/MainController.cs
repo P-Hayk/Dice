@@ -5,14 +5,16 @@ using System;
 using System.Web.Http;
 using System.Web.Http.Cors;
 
+
 namespace DiceWebAPI.Controllers
 {
     [EnableCors(origins: "*", headers: "*", methods: "*")]
-    [Authorization]
+    //[Authorization]
     public class MainController : ApiController
     {
 
         // POST: api/Main
+        //[Authorization(ControllerContext.Request)]
         public BaseResponse Post([FromBody]BaseRequest request)
         {
             try
