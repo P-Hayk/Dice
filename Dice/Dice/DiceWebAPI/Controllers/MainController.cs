@@ -9,7 +9,7 @@ using System.Web.Mvc;
 
 namespace DiceWebAPI.Controllers
 {
-    [EnableCors(origins: "*", headers: "*", methods: "*")]
+    //[EnableCors(origins: "*", headers: "*", methods: "*")]
     public class MainController : ApiController
     {
 

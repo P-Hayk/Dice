@@ -17,7 +17,7 @@ namespace DiceWebAPI
             
             var config = new HubConfiguration();
             config.EnableJSONP = true;
-           // app.UseCors(CorsOptions.AllowAll);
+                        app.UseCors(CorsOptions.AllowAll);
             app.MapSignalR(config);
 
             //app.Map("/api/signalr", map =>
