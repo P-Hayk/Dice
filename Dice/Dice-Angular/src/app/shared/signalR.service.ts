@@ -4,14 +4,14 @@ import { SignalR, ISignalRConnection } from "ng2-signalr";
 
 @Injectable()
 export class SignalRService {
-   private connection: ISignalRConnection;
+   private connection: Promise<ISignalRConnection>;
 
     constructor(private _signalR: SignalR) {
        
-        this._signalR.connect()
+        this.connection = this._signalR.connect()
             .then(
             c => {
-                this.connection = c;
+               return  c;
 
             });
     }

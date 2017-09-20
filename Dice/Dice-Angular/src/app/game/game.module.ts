@@ -5,6 +5,7 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { ApiRequestService } from "app/shared/api.request.service";
 import { GameComponent } from "app/game/game.component";
 import { GameRoutingModule } from "app/game/game-routing.module";
+import { StepRequestService } from 'app/shared/step.request.service';
 
 
 @NgModule({
@@ -14,7 +15,7 @@ import { GameRoutingModule } from "app/game/game-routing.module";
         GameRoutingModule,
         ReactiveFormsModule
     ],
-    providers:[],
+    providers:[StepRequestService],
     declarations: [GameComponent]
 })
 

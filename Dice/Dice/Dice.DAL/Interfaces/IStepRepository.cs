@@ -8,5 +8,6 @@ namespace Dice.DAL.Interfaces
 {
     public interface IStepRepository : IBaseRepository<Step>
     {
+        Step Add(Step step);
     }
 }

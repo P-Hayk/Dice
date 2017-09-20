@@ -51,8 +51,8 @@ namespace DiceWebAPI.Controllers
 
         private void CheckToken(string token)
         {
-            var playerSessionBll = DependencyResolver.Current.GetService<IPlayerSessionBll>();
-            playerSessionBll.CheckToken(token);
+            //var playerSessionBll = DependencyResolver.Current.GetService<IPlayerSessionBll>();
+            //playerSessionBll.CheckToken(token);
         }
     }
 }

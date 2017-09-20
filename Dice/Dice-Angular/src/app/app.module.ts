@@ -9,6 +9,7 @@ import { ApiRequestService } from "app/shared/api.request.service";
 import { CookieService } from "angular2-cookie/services";
 import { SignalRService } from "app/shared/signalR.service";
 import { SignalRConfiguration, SignalRModule } from "ng2-signalr";
+import { DataService } from 'app/shared/data.service';
 
 // v2.0.0
 export function createConfig(): SignalRConfiguration {
@@ -30,7 +31,7 @@ export function createConfig(): SignalRConfiguration {
     AppRoutingModule,
     SignalRModule.forRoot(createConfig)
   ],
-  providers: [ApiRequestService,CookieService,SignalRService],
+  providers: [ApiRequestService,CookieService,SignalRService,DataService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

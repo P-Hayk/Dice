@@ -7,6 +7,6 @@ namespace Dice.Bll.Interfaces
     {
         GameDTO AddGame(GameDTO gameDTO);
 
-        int JoinToGame(GameDTO gameDTO);
+        GameDTO JoinToGame(GameDTO gameDTO);
     }
 }
