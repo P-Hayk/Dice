@@ -27,7 +27,7 @@ export class ApiRequestService {
             url: url,
             method: method,
             headers: headers,
-            //withCredentials: true 
+            withCredentials: true 
         });
 
         if (!_.isUndefined(body)) {

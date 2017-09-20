@@ -14,10 +14,10 @@ namespace DiceWebAPI
     {
         public void Configuration(IAppBuilder app)
         {
-            
+
             var config = new HubConfiguration();
             config.EnableJSONP = true;
-                        app.UseCors(CorsOptions.AllowAll);
+            app.UseCors(CorsOptions.AllowAll);
             app.MapSignalR(config);
 
             //app.Map("/api/signalr", map =>
@@ -27,10 +27,10 @@ namespace DiceWebAPI
             //    {
             //        EnableDetailedErrors = true,
             //        EnableJSONP = true
-               
+
             //    });
             //});
-            
+
             GlobalConfiguration.Configure(WebApiConfig.Register);
 
         }
