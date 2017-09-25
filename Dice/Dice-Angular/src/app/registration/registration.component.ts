@@ -2,6 +2,7 @@ import { Component, OnInit, OnDestroy } from '@angular/core';
 import { Router, ActivatedRoute, Route } from '@angular/router';
 import { Subscription } from 'rxjs/Subscription';
 import { PlayerRequestService } from "app/shared/player.request.service";
+import { StatusMethod } from "app/shared/status";
 import { CookieService } from 'angular2-cookie/core';
 
 @Component({
@@ -19,9 +20,11 @@ export class RegistrationComponent implements OnInit, OnDestroy {
 
     public regUserName: string;
     public regPass: string;
-    public regRepeatePass:string;
-    public FirstName:string;
-    public LastName:string;
+    public regRepeatePass: string;
+    public FirstName: string;
+    public LastName: string;
+
+    public RegError:boolean=false;
 
     ngOnDestroy(): void {
 
@@ -31,7 +34,7 @@ export class RegistrationComponent implements OnInit, OnDestroy {
     }
 
     registration() {
-        if(this.regPass!=this.regRepeatePass){
+        if (this.regPass != this.regRepeatePass) {
             console.log("ERROR Password!=RepeatePassword");
             return;
         }
@@ -39,24 +42,33 @@ export class RegistrationComponent implements OnInit, OnDestroy {
             {
                 UserName: this.regUserName,
                 PasswordHash: this.regPass,
-                FirstName:this.FirstName,
-                LastName:this.LastName
+                FirstName: this.FirstName,
+                LastName: this.LastName
             }
-        //this.cookieService.putObject('form',data);
-        this.cookieService.putObject('form','data');
-        console.log(this.cookieService.get('form'));
+        this.cookieService.putObject('form', data);
+        this.cookieService.put('method', StatusMethod.RegistratePlayer.toString());
+
         this.PlayerRequestService.registrationPlayer(data).subscribe(
             result => {
-                //localStorage.setItem('token', result.ResponseObject.Token);
-                //localStorage.setItem('Id', result.ResponseObject.PlayerId);                
-                //this.cookieService.putObject('token', result.ResponseObject);
-                if(result.ResponseCode==0)
+                this.RegError=false;
+                console.log("mtav");
+                if (result.ResponseCode == 0)
                     this.route.navigate(['desk']);
-                else{
-                    //this.cookieService.remove('token');
+                else
                     this.route.navigate(['login']);
-                }
-             //this.cookieService.remove('form');
+
+                this.cookieService.remove('form');
+                this.cookieService.remove('method');
+            }, error =>{
+                this.RegError=true;
+                this.SetDefaultForm();
             });
+    }
+    SetDefaultForm(){
+        this.regUserName=null;
+        this.regPass=null;
+        this.regRepeatePass=null;
+        this.FirstName=null;
+        this.LastName=null
     }
 }

@@ -4,11 +4,13 @@ import { Observable } from "rxjs/Observable";
 import 'rxjs/Rx';
 import * as _ from "lodash";
 
+import { Router } from '@angular/router';
+
 @Injectable()
 
 export class ApiRequestService {
 
-    constructor(private http: Http) {
+    constructor(private http: Http,private route: Router) {
 
 
     }
@@ -38,7 +40,11 @@ export class ApiRequestService {
 
         const request = new Request(options);
 
-        return this.http.request(request).map(res => res.json());
+        return this.http.request(request).
+        map(res => res.json()).
+        catch(error=>{
+            return Observable.throw(error);
+        });
     }
 
     private postRequest(path: string, body: object) {

@@ -1,5 +1,6 @@
 import { Injectable } from "@angular/core";
 import { ApiRequestService } from "app/shared/api.request.service";
+import { StatusMethod} from "./status"
 
 const Controller = "Player";
 
@@ -12,16 +13,16 @@ export class PlayerRequestService {
 
     loginPlayer(data: any) {
 
-        let request = this.prepairRequest(data, "LoginPlayer");
+        let request = this.prepairRequest(data, StatusMethod.LoginPlayer);
 
         return this.ApiRequestService.Request(request);
     }
     registrationPlayer(data:any){
-        let request = this.prepairRequest(data, "RegistratePlayer");
+        let request = this.prepairRequest(data, StatusMethod.RegistratePlayer);
         return this.ApiRequestService.Request(request);
     }
 
-    private prepairRequest(data: any, method: string) {
+    private prepairRequest(data: any, method: number) {
 
         let body = {
             Controller: Controller,

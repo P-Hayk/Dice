@@ -1,23 +1,29 @@
-﻿using Dice.Bll.Interfaces;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
+﻿
 using System.Web.Mvc;
-//using System.Web.Http.Controllers;
 using System.Net.Http;
-using Dice.DTO;
-//using System.Web.Http.Filters;
-using System.Text;
-using Newtonsoft.Json;
 using System.Threading;
 using System.Net.Http.Headers;
+using System.Net;
+using System.Threading.Tasks;
+
+using Dice.DTO;
+using Dice.Bll.Interfaces;
+
+using Newtonsoft.Json;
+using System.Linq;
+using System.Collections.Generic;
+using System;
 
 namespace DiceWebAPI.Filter
 {
     public class AuthorizationAttribute : DelegatingHandler
     {
         IPlayerBll playerBll;
+        private enum Method
+        {
+            LoginPlayer = 0,
+            RegistratePlayer = 1,         
+        }
         public AuthorizationAttribute()
         {
             playerBll = DependencyResolver.Current.GetService<IPlayerBll>();
@@ -29,21 +35,43 @@ namespace DiceWebAPI.Filter
         public string PasswordCode { get; set; }
 
 
-        protected async override System.Threading.Tasks.Task<HttpResponseMessage> SendAsync(HttpRequestMessage request, CancellationToken cancellationToken)
+        protected async override Task<HttpResponseMessage> SendAsync(HttpRequestMessage request, CancellationToken cancellationToken)
         {
-            CookieHeaderValue x =request.Headers.GetCookies().FirstOrDefault();
-            CookieHeaderValue z = request.Headers.GetCookies("asd").FirstOrDefault();
-            var k = request.Headers.GetCookies("form");
-            if (false)
+            PlayerDTO form;
+            int method;
+            string token;
+
+            CookieHeaderValue CookieValue = request.Headers.GetCookies().FirstOrDefault();
+            if (CookieValue !=null && CookieValue.Cookies.Count != 0)
             {
-                HttpResponseMessage message = new HttpResponseMessage();
-                //message.Content = "aa";
-                return message;
+                CookieState form_state = CookieValue.Cookies.Where(x => x.Name == "form").FirstOrDefault();
+                form = JsonConvert.DeserializeObject<PlayerDTO>(form_state?.Value);
+
+                CookieState method_state = CookieValue.Cookies.Where(x => x.Name == "method").FirstOrDefault();
+                method = method_state==null ? -1: Int32.Parse(method_state.Value);
+
+                CookieState token_state = CookieValue.Cookies.Where(x => x.Name == "Token").FirstOrDefault();
+                token = token_state?.Value;
+
+                if (method == -1)
+                {
+
+                }
+                if ((Method)method==Method.LoginPlayer)
+                {
+                    PlayerDTO playerDTO = playerBll.GetPlayerByUserName(form.UserName);
+                    if (playerDTO == null)
+                        return new HttpResponseMessage(HttpStatusCode.Unauthorized);
+                }
+                if ((Method)method == Method.RegistratePlayer)
+                {
+                    PlayerDTO playerDTO=playerBll.GetPlayerByUserName(form.UserName);
+                    if (playerDTO != null)
+                        return new HttpResponseMessage(HttpStatusCode.Conflict);
+                }
             }
-            else
-            {
-                return await base.SendAsync(request, cancellationToken);
-            }
+
+            return await base.SendAsync(request, cancellationToken);
         }
 
         //protected override void HandleUnauthorizedRequest(AuthorizationContext filterContext)

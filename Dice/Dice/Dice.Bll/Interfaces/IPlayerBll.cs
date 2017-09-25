@@ -7,5 +7,8 @@ namespace Dice.Bll.Interfaces
     {
         PlayerDTO AddPlayer(PlayerDTO player);
         PlayerSessionDTO LoginPlayer(LoginDetails input);
+
+        PlayerDTO GetPlayer(PlayerDTO player);
+        PlayerDTO GetPlayerByUserName(string UserName);
     }
 }

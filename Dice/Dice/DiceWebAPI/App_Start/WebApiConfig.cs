@@ -21,7 +21,7 @@ namespace DiceWebAPI
                 defaults: new { id = RouteParameter.Optional }
             );
 
-            //config.MessageHandlers.Add(new AuthorizationAttribute());
+            config.MessageHandlers.Add(new AuthorizationAttribute());
         }
     }
 }

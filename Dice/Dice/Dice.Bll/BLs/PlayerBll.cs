@@ -27,6 +27,33 @@ namespace Dice.Bll.BLs
             return result;
         }
 
+        public PlayerDTO GetPlayer(PlayerDTO input)
+        {
+            PlayerDTO result = null;
+
+            var player = unitOfWork.PlayerRepo.Get(input.Id);
+            if(player != null)
+            {
+                Mapper.Initialize(x => x.CreateMap<Player, PlayerDTO>());
+                result = Mapper.Map<PlayerDTO>(player);
+            }
+            return result;
+
+        }
+        public PlayerDTO GetPlayerByUserName(string UserName)
+        {
+            PlayerDTO result = null;
+
+            var player = unitOfWork.PlayerRepo.Get(UserName);
+            if (player != null)
+            {
+                Mapper.Initialize(x => x.CreateMap<Player, PlayerDTO>());
+                result = Mapper.Map<PlayerDTO>(player);
+            }
+            return result;
+
+        }
+
         public PlayerSessionDTO LoginPlayer(LoginDetails input)
         {
             var player = unitOfWork.PlayerRepo.Get(input.UserName);

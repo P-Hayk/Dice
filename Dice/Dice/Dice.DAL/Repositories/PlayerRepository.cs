@@ -24,7 +24,7 @@ namespace Dice.DAL.Repositories
 
         public Player Get(int id)
         {
-            throw new NotImplementedException();
+            return db.Players.Where(x => x.Id == id).FirstOrDefault();
         }
 
         public Player Get(string userName)

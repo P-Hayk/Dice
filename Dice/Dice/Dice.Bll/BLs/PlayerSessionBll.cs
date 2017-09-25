@@ -2,6 +2,7 @@
 using Dice.Bll.Interfaces;
 using Dice.DAL;
 using Dice.DAL.Interfaces;
+using Dice.DTO;
 using Ninject;
 using System;
 using System.Collections.Generic;
@@ -19,17 +20,29 @@ namespace Dice.Bll.BLs
         public IUnitOfWork unitOfWork { get; set; }
 
 
-        public string AddPlayerSesion(int playerId)
+        public PlayerSessionDTO AddPlayerSesion(int playerId)
         {
-            PlayerSession ps = new PlayerSession
+            Player player=unitOfWork.PlayerRepo.Get(playerId);
+            if (player == null)
+                return null;
+
+            PlayerSessionDTO playerSessionDTO = new PlayerSessionDTO
             {
                 PlayerId = playerId,
                 Token = Guid.NewGuid().ToString(),
-                EndTime = DateTime.Now.AddHours(1)
+                StartTime = DateTime.Now,
+                EndTime = DateTime.MinValue
             };
 
-            unitOfWork.PlayerSessionRepo.Add(ps);
-            return ps.Token;
+            player = null;
+            Mapper.Initialize(x => x.CreateMap<PlayerSessionDTO, PlayerSession>());
+            PlayerSession playerSession = Mapper.Map<PlayerSession>(playerSessionDTO);
+
+            unitOfWork.PlayerSessionRepo.Add(playerSession);
+            unitOfWork.Save();
+
+            playerSessionDTO.Id = playerSession.Id;
+            return playerSessionDTO;
         }
     }
 }
