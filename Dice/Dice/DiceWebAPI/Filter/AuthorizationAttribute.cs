@@ -19,6 +19,7 @@ namespace DiceWebAPI.Filter
     public class AuthorizationAttribute : DelegatingHandler
     {
         IPlayerBll playerBll;
+        IPlayerSessionBll playerSessionBll;
         private enum Method
         {
             LoginPlayer = 0,
@@ -27,10 +28,12 @@ namespace DiceWebAPI.Filter
         public AuthorizationAttribute()
         {
             playerBll = DependencyResolver.Current.GetService<IPlayerBll>();
+            playerSessionBll = DependencyResolver.Current.GetService<IPlayerSessionBll>();
         }
         public AuthorizationAttribute(HttpContent content)
         {
             playerBll = DependencyResolver.Current.GetService<IPlayerBll>();
+            playerSessionBll = DependencyResolver.Current.GetService<IPlayerSessionBll>();
         }
         public string PasswordCode { get; set; }
 
@@ -53,9 +56,9 @@ namespace DiceWebAPI.Filter
                 CookieState token_state = CookieValue.Cookies.Where(x => x.Name == "Token").FirstOrDefault();
                 token = token_state?.Value;
 
-                if (method == -1)
+                if (token!=null && method == -1 && form==null)
                 {
-
+                    //playerSessionBll.
                 }
                 if ((Method)method==Method.LoginPlayer)
                 {
