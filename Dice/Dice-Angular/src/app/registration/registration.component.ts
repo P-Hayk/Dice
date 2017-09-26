@@ -2,8 +2,10 @@ import { Component, OnInit, OnDestroy } from '@angular/core';
 import { Router, ActivatedRoute, Route } from '@angular/router';
 import { Subscription } from 'rxjs/Subscription';
 import { PlayerRequestService } from "app/shared/player.request.service";
-import { StatusMethod } from "app/shared/status";
 import { CookieService } from 'angular2-cookie/core';
+import { BaseResponse, InheritResponse } from '../shared/base.response';
+import { StatusMethod } from "app/shared/status";
+
 
 @Component({
     selector: 'registration',
@@ -24,7 +26,7 @@ export class RegistrationComponent implements OnInit, OnDestroy {
     public FirstName: string;
     public LastName: string;
 
-    public RegError:boolean=false;
+    public RegError: boolean = false;
 
     ngOnDestroy(): void {
 
@@ -50,25 +52,35 @@ export class RegistrationComponent implements OnInit, OnDestroy {
 
         this.PlayerRequestService.registrationPlayer(data).subscribe(
             result => {
-                this.RegError=false;
-                console.log("mtav");
-                if (result.ResponseCode == 0)
+                this.ClearCookie();
+                this.RegError = false;
+                var response: BaseResponse = result as BaseResponse;
+                var responseObject = response.ResponseObject as InheritResponse;
+
+                if (result.ResponseCode == 0) {
+                    this.cookieService.putObject('token', responseObject.token);
+                    this.cookieService.putObject('playerid', responseObject.playerid);
                     this.route.navigate(['desk']);
+                }
                 else
                     this.route.navigate(['login']);
+                
+            }, error => {
+                this.ClearCookie();
 
-                this.cookieService.remove('form');
-                this.cookieService.remove('method');
-            }, error =>{
-                this.RegError=true;
+                this.RegError = true;
                 this.SetDefaultForm();
             });
     }
-    SetDefaultForm(){
-        this.regUserName=null;
-        this.regPass=null;
-        this.regRepeatePass=null;
-        this.FirstName=null;
-        this.LastName=null
+    SetDefaultForm() {
+        this.regUserName = null;
+        this.regPass = null;
+        this.regRepeatePass = null;
+        this.FirstName = null;
+        this.LastName = null
+    }
+    ClearCookie() {
+        this.cookieService.remove('form');
+        this.cookieService.remove('method');
     }
 }

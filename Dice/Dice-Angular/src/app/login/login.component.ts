@@ -3,6 +3,8 @@ import { Router, ActivatedRoute, Route } from '@angular/router';
 import { Subscription } from 'rxjs/Subscription';
 import { PlayerRequestService } from "app/shared/player.request.service";
 import { CookieService } from 'angular2-cookie/core';
+import { BaseResponse, InheritResponse } from '../shared/base.response';
+import { StatusMethod } from "app/shared/status";
 
 @Component({
     selector: 'login',
@@ -19,6 +21,7 @@ export class LoginComponent implements OnInit, OnDestroy {
 
     public loginUserName: string;
     public loginPass: string;
+    public loginError: boolean = false;
 
     ngOnDestroy(): void {
 
@@ -33,15 +36,37 @@ export class LoginComponent implements OnInit, OnDestroy {
                 UserName: this.loginUserName,
                 Password: this.loginPass
             }
+        this.cookieService.putObject('login', data);
+        this.cookieService.put('method', StatusMethod.LoginPlayer.toString());
+
         this.PlayerRequestService.loginPlayer(data).subscribe(
             result => {
-                localStorage.setItem('token', result.ResponseObject.Token);
-                localStorage.setItem('Id', result.ResponseObject.PlayerId);                
-                this.cookieService.putObject('a', result.ResponseObject);
+                this.ClearCookie();
+                this.loginError = false;
+                var response: BaseResponse = result as BaseResponse;
+                var responseObject = response.ResponseObject as InheritResponse;
 
-                this.route.navigate(['desk']);
+                if (response.ResponseCode == 0) {
+                    this.cookieService.putObject('token', responseObject.token);
+                    this.cookieService.putObject('playerid', responseObject.playerid);
+                    this.route.navigate(['desk']);
+                }
+                else
+                    this.route.navigate(['login']);
+                
+            }, error => {
+                this.ClearCookie();
 
+                this.loginError = true;
+                this.SetDefaultForm();
             });
     }
-
+    SetDefaultForm() {
+        this.loginUserName = null;
+        this.loginPass = null;
+    }
+    ClearCookie() {
+        this.cookieService.remove('login');
+        this.cookieService.remove('method');
+    }
 }

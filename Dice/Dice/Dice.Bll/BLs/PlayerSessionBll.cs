@@ -44,6 +44,21 @@ namespace Dice.Bll.BLs
             playerSessionDTO.Id = playerSession.Id;
             return playerSessionDTO;
         }
+
+        public PlayerSessionDTO GetPlayerSesion(int playerId)
+        {
+            throw new NotImplementedException();
+        }
+
+        public PlayerSessionDTO GetPlayerSesion(string token)
+        {
+            PlayerSession playerSession= unitOfWork.PlayerSessionRepo.GetPlayerSession(token);
+
+            Mapper.Initialize(x => x.CreateMap<PlayerSession, PlayerSessionDTO>());
+            PlayerSessionDTO playerSessionDTO = Mapper.Map<PlayerSessionDTO>(playerSession);
+
+            return playerSessionDTO;
+        }
     }
 }
 

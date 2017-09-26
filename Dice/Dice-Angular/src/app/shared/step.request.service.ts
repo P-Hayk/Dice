@@ -1,7 +1,8 @@
 import { Injectable } from "@angular/core";
 import { ApiRequestService } from "app/shared/api.request.service";
+import {ControllerName,StepMethod} from "./status";
 
-const Controller = "Step";
+const Controller:number = ControllerName.Step;
 
 @Injectable()
 export class StepRequestService {
@@ -12,19 +13,19 @@ export class StepRequestService {
 
     roleDice(data: any) {
 
-        let request = this.prepairRequest(data, "RoleDice");
+        let request = this.prepairRequest(data, StepMethod.RoleDice);
 
         return this.ApiRequestService.Request(request);
     }
    
 
-    private prepairRequest(data: any, method: string) {
+    private prepairRequest(data: any, method: number) {
 
         let body = {
             Controller: Controller,
             Method: method,
             RequestObject: data,
-            Token:localStorage.getItem('token')
+            //Token:localStorage.getItem('token')
         };
         return body;
     }

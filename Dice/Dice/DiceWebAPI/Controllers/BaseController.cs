@@ -11,7 +11,6 @@ namespace DiceWebAPI.Controllers
         Lazy<IHubContext> hub = new Lazy<IHubContext>(
            () => GlobalHost.ConnectionManager.GetHubContext<GameHub>()
        );
-
         protected IHubContext Hub
         {
             get { return hub.Value; }

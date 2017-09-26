@@ -5,7 +5,7 @@ using DiceWebAPI.Util;
 using System.Threading.Tasks;
 using Newtonsoft.Json;
 using Dice.DTO;
-
+using System;
 
 namespace DiceWebAPI
 {
@@ -18,7 +18,7 @@ namespace DiceWebAPI
 
         public override Task OnConnected()
         {
-            int playerId = JsonConvert.DeserializeObject<PlayerSessionDTO>(Context.RequestCookies["a"].Value).PlayerId;
+            int playerId = Int32.Parse(JsonConvert.DeserializeObject<string>(Context.RequestCookies["playerid"].Value));
            
             _connections.Add(playerId, Context.ConnectionId);
 
@@ -27,7 +27,8 @@ namespace DiceWebAPI
 
         public override Task OnDisconnected(bool stopCalled)
         {
-            int playerId = JsonConvert.DeserializeObject<PlayerSessionDTO>(Context.RequestCookies["a"].Value).PlayerId;
+            //int playerId = JsonConvert.DeserializeObject<PlayerSessionDTO>(Context.RequestCookies["playerid"].Value).PlayerId;
+            int playerId = Int32.Parse(JsonConvert.DeserializeObject<string>(Context.RequestCookies["playerid"].Value));
 
             _connections.Remove(playerId, Context.ConnectionId);
 
@@ -36,7 +37,8 @@ namespace DiceWebAPI
 
         public override Task OnReconnected()
         {
-            int playerId = JsonConvert.DeserializeObject<PlayerSessionDTO>(Context.RequestCookies["a"].Value).PlayerId;
+            //int playerId = JsonConvert.DeserializeObject<PlayerSessionDTO>(Context.RequestCookies["playerid"].Value).PlayerId;
+            int playerId = Int32.Parse(JsonConvert.DeserializeObject<string>(Context.RequestCookies["playerid"].Value));
             if (!_connections.GetConnections(playerId).Contains(Context.ConnectionId))
             {
                 _connections.Add(playerId, Context.ConnectionId);

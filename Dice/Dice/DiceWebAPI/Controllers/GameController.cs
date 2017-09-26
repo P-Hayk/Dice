@@ -22,9 +22,9 @@ namespace DiceWebAPI.Controllers
         {
             switch (request.Method)
             {
-                case "CreateGame":
+                case (int)GameMethod.CreateGame://"CreateGame":
                     return CreateGame(JsonConvert.DeserializeObject<GameDTO>(request.RequestData));
-                case "JoinToGame":
+                case (int)GameMethod.JoinToGame://"JoinToGame":
                     return JoinToGame(JsonConvert.DeserializeObject<GameDTO>(request.RequestData));
             }
             throw new Exception();

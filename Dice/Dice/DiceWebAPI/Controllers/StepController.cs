@@ -22,7 +22,7 @@ namespace DiceWebAPI.Controllers
         {
             switch (request.Method)
             {
-                case "RoleDice":
+                case (int)StepMethod.RoleDice:
                     return RoleDice(JsonConvert.DeserializeObject<StepDTO>(request.RequestData));
 
             }

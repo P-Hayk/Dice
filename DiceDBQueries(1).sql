@@ -58,3 +58,5 @@ FirstDice int NOT NULL REFERENCES Dice,
 SecondDice int NOT NULL REFERENCES Dice,
 RoundId int NOT NULL
 )
+
+Select * from PlayerSession
