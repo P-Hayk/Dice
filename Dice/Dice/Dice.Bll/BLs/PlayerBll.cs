@@ -13,7 +13,7 @@ namespace Dice.Bll.BLs
         [Inject]
         public IUnitOfWork unitOfWork { get; set; }
 
-        public PlayerDTO AddPlayer(PlayerDTO playerDTO)
+        public PlayerSessionDTO AddPlayer(PlayerDTO playerDTO)
         {
             ValidatePlayer(playerDTO);
             playerDTO.IsActive = true;
@@ -21,8 +21,19 @@ namespace Dice.Bll.BLs
             Player player = Mapper.Map<Player>(playerDTO);
 
             Player response = unitOfWork.PlayerRepo.Add(player);
-            Mapper.Initialize(x => x.CreateMap<Player, PlayerDTO>());
-            PlayerDTO result = Mapper.Map<PlayerDTO>(response);
+            //Mapper.Initialize(x => x.CreateMap<Player, PlayerDTO>());
+            //PlayerDTO result = Mapper.Map<PlayerDTO>(response);
+
+            var ps = unitOfWork.PlayerSessionRepo.Add(
+               new PlayerSession
+               {
+                   PlayerId = player.Id,
+                   StartTime = DateTime.Now,
+                   EndTime = DateTime.MinValue,
+                   Token = Guid.NewGuid().ToString()
+               });
+            Mapper.Initialize(x => x.CreateMap<PlayerSession, PlayerSessionDTO>());
+            PlayerSessionDTO result = Mapper.Map<PlayerSessionDTO>(ps);
 
             return result;
         }
@@ -63,15 +74,20 @@ namespace Dice.Bll.BLs
             if (player.PasswordHash != input.Password)
                 throw new DiceException("WrongUserName");
 
+            int playerid=unitOfWork.PlayerSessionRepo.DeleteAllPlayerSessions(player.Id);
+
             var ps = unitOfWork.PlayerSessionRepo.Add(
-                new DAL.PlayerSession
+                new PlayerSession
                 {
                     PlayerId = player.Id,
-                    EndTime = DateTime.Now.AddDays(1),
+                    StartTime = DateTime.Now,
+                    EndTime = DateTime.MinValue,
                     Token = Guid.NewGuid().ToString()
                 });
-            Mapper.Initialize(x => x.CreateMap<DAL.PlayerSession, PlayerSessionDTO>());
-            return Mapper.Map<PlayerSessionDTO>(ps);
+            Mapper.Initialize(x => x.CreateMap<PlayerSession, PlayerSessionDTO>());
+            PlayerSessionDTO playerSessionDTO = Mapper.Map<PlayerSessionDTO>(ps);
+
+            return playerSessionDTO;
         }
 
         private void ValidatePlayer(PlayerDTO playerDTO)

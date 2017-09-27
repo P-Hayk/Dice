@@ -19,7 +19,6 @@ namespace DiceWebAPI.Controllers
             try
             {
                 return GetResponse(request);
-
             }
             catch (DiceException ex)
             {
@@ -32,27 +31,31 @@ namespace DiceWebAPI.Controllers
             }
 
         }
+        private enum a
+        {
+            aaa=0
+        }
         private BaseResponse GetResponse(BaseRequest request)
         {
-            if (request.Method != "RegistratePlayer" && request.Method != "LoginPlayer")
-                CheckToken(request.Token);
+            //if (request.Method != "RegistratePlayer" && request.Method != "LoginPlayer")
+            //    CheckToken(request.Token);
             switch (request.Controller)
             {
-                case "Player":
+                case (int)ControllerName.Player:
                     return new PlayerController().InvokeFunction(request);
-                case "Game":
+                case (int)ControllerName.Game:
                     return new GameController().InvokeFunction(request);
-                case "Step":
+                case (int)ControllerName.Step:
                     return new StepController().InvokeFunction(request);
 
             }
             throw new Exception();
         }
 
-        private void CheckToken(string token)
-        {
-            //var playerSessionBll = DependencyResolver.Current.GetService<IPlayerSessionBll>();
-            //playerSessionBll.CheckToken(token);
-        }
+        //private void CheckToken(string token)
+        //{
+        //    //var playerSessionBll = DependencyResolver.Current.GetService<IPlayerSessionBll>();
+        //    //playerSessionBll.CheckToken(token);
+        //}
     }
 }

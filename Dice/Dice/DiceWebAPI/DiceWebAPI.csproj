@@ -191,6 +191,7 @@
     <Compile Include="Controllers\MainController.cs" />
     <Compile Include="Controllers\PlayerController.cs" />
     <Compile Include="Controllers\StepController.cs" />
+    <Compile Include="Enums\Enums.cs" />
     <Compile Include="Filter\AuthorizationAttribute.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>

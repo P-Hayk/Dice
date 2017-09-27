@@ -1,8 +1,8 @@
 import { Injectable } from "@angular/core";
 import { ApiRequestService } from "app/shared/api.request.service";
-import { StatusMethod} from "./status"
+import {ControllerName, StatusMethod} from "./status"
 
-const Controller = "Player";
+const Controller:number = ControllerName.Player;
 
 @Injectable()
 export class PlayerRequestService {

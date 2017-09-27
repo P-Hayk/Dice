@@ -11,5 +11,7 @@ namespace Dice.Bll.Interfaces
     public interface IPlayerSessionBll
     {
         PlayerSessionDTO AddPlayerSesion(int playerId);
+        PlayerSessionDTO GetPlayerSesion(int playerId);
+        PlayerSessionDTO GetPlayerSesion(string token);
     }
 }

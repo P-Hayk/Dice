@@ -58,7 +58,10 @@ namespace DiceWebAPI.Filter
 
                 if (token!=null && method == -1 && form==null)
                 {
-                    //playerSessionBll.
+                    PlayerSessionDTO playerSessionDTO= playerSessionBll.GetPlayerSesion(token);
+                    if (playerSessionDTO == null)
+                        return new HttpResponseMessage(HttpStatusCode.Unauthorized);
+                    return await base.SendAsync(request, cancellationToken);
                 }
                 if ((Method)method==Method.LoginPlayer)
                 {

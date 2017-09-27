@@ -5,7 +5,7 @@ namespace Dice.Bll.Interfaces
 {
     public interface IPlayerBll
     {
-        PlayerDTO AddPlayer(PlayerDTO player);
+        PlayerSessionDTO AddPlayer(PlayerDTO player);
         PlayerSessionDTO LoginPlayer(LoginDetails input);
 
         PlayerDTO GetPlayer(PlayerDTO player);

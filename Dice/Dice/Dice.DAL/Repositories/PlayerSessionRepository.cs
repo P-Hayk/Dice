@@ -35,5 +35,15 @@ namespace Dice.DAL.Repositories
         {
             throw new NotImplementedException();
         }
+
+        public int DeleteAllPlayerSessions(int playerid)
+        {
+            List<PlayerSession> list = db.PlayerSessions.Where(x => x.Token != null).ToList();
+            list.All(y=> { y.Token = null; return true; });
+
+            db.SaveChanges();
+
+            return playerid;
+        }
     }
 }

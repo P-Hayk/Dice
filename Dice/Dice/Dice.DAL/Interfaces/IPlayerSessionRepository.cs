@@ -12,5 +12,7 @@ namespace Dice.DAL.Interfaces
         PlayerSession Add(PlayerSession playerSession);
 
         PlayerSession GetPlayerSession(string token);
+
+        int DeleteAllPlayerSessions(int playerid);
     }
 }

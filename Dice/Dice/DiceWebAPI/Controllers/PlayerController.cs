@@ -8,7 +8,7 @@ using System.Web.Security;
 
 namespace DiceWebAPI.Controllers
 {
-    public class PlayerController
+    public class PlayerController: BaseController
     {
         private IPlayerSessionBll playerSessionBll;
         private IPlayerBll playerBll;
@@ -22,9 +22,9 @@ namespace DiceWebAPI.Controllers
         {
             switch (request.Method)
             {
-                case "LoginPlayer":
+                case (int)Method.LoginPlayer:
                     return LoginPlayer(JsonConvert.DeserializeObject<LoginDetails>(request.RequestData));
-                case "RegistratePlayer":
+                case (int)Method.RegistratePlayer:
                     return RegistratePlayer(JsonConvert.DeserializeObject<PlayerDTO>(request.RequestData));
             }
             throw new Exception();
@@ -32,16 +32,28 @@ namespace DiceWebAPI.Controllers
 
         private BaseResponse LoginPlayer(LoginDetails input)
         {
-            var plSession = playerBll.LoginPlayer(input);            
-            return new BaseResponse { ResponseCode = 0, ResponseObject = plSession };
+            PlayerSessionDTO plSession = playerBll.LoginPlayer(input);            
+            return new BaseResponse
+            {
+                ResponseCode = 0,
+                ResponseObject = CreateResponse(plSession.Token, plSession.PlayerId)
+            };
         }
 
         private BaseResponse RegistratePlayer(PlayerDTO playerDTO)
         {
+            PlayerSessionDTO plSession = playerBll.AddPlayer(playerDTO);
 
-            PlayerDTO player = playerBll.AddPlayer(playerDTO);
+            return new BaseResponse()
+            {
+                ResponseCode = 0,
+                ResponseObject = CreateResponse(plSession.Token, plSession.PlayerId)
+            };
+        }
 
-            return new BaseResponse() { ResponseCode = 0, ResponseObject = player };
+        private Object CreateResponse(string token,int playerid)
+        {
+            return new { token = token, playerid = playerid };
         }
 
     }
