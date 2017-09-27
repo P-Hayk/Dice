@@ -25,14 +25,11 @@ namespace Dice.Bll.BLs
             if (currentGame == null)
                 throw new DiceException(1, "");
 
-            int stepsCount = 0;
-
-            if (currentGame.Rounds.Count != 0)
-                stepsCount = currentGame.Rounds.LastOrDefault().Steps.Count;
+            Round currentRound = currentGame.Rounds.ToList().Find(x => !x.EndTime.HasValue);
 
             Random r = new Random();
 
-            if (stepsCount % 2 == 0 && currentGame.FirstPlayerId == stepDTO.PlayerId)
+            if (currentRound == null && currentGame.FirstPlayerId == stepDTO.PlayerId)
             {
                 if (currentGame.Rounds.Count == 3)
                     throw new DiceException(1, "GameOver");
@@ -40,34 +37,40 @@ namespace Dice.Bll.BLs
                 Round round = new Round
                 {
                     GameId = stepDTO.GameId,
+                    StartTime = DateTime.Now,
                     Steps = new List<Step> {
                         new Step
                         {
                             FirstDice = r.Next(1, 7),
-                            SecondDice =r.Next(1,7)
+                            SecondDice =r.Next(1,7),
                         }
                     }
                 };
                 unitOfWork.RoundRepo.Add(round);
+                stepDTO.FirstDice = round.Steps.Last().FirstDice;
+                stepDTO.SecondDice = round.Steps.Last().SecondDice;
 
             }
 
-            else if (stepsCount % 2 != 0 && currentGame.SecondPlayerId == stepDTO.PlayerId)
+            else if (currentRound != null && currentGame.SecondPlayerId == stepDTO.PlayerId)
             {
-                currentGame.Rounds.Last().Steps.Add(
+
+                currentRound.Steps.Add(
                     new Step
                     {
                         FirstDice = r.Next(1, 7),
                         SecondDice = r.Next(1, 7)
                     });
+                currentRound.EndTime = DateTime.Now;
+
+                stepDTO.FirstDice = currentRound.Steps.Last().FirstDice;
+                stepDTO.SecondDice = currentRound.Steps.Last().SecondDice;
+
             }
             else
                 throw new DiceException(1, "");
 
             unitOfWork.Save();
-
-            stepDTO.FirstDice = currentGame.Rounds.Last().Steps.Last().FirstDice;
-            stepDTO.SecondDice = currentGame.Rounds.Last().Steps.Last().SecondDice;
 
             return stepDTO;
         }

@@ -7,10 +7,10 @@ export enum StatusMethod {
     LoginPlayer = 0,
     RegistratePlayer = 1
 }
-export enum GameMethod{
-    CreateGame=0,
-    JoinToGame=1
+export enum GameMethod {
+    CreateGame = 0,
+    JoinToGame = 1
 }
-export enum StepMethod{
-    RoleDice=0
+export enum StepMethod {
+    RoleDice = 0
 }

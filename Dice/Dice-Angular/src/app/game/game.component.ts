@@ -54,7 +54,7 @@ export class GameComponent implements OnInit {
     setTimeout(() => { this.firstdice = `dice_${x}`; this.secondice = `dice_${y}` }, 800);
   }
   test(x) {
-    console.log(x)
+  
     this.animateDice(x.FirstDice, x.SecondDice);
   }
 }

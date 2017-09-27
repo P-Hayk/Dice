@@ -16,7 +16,8 @@ export class LoginComponent implements OnInit, OnDestroy {
     constructor(
         private PlayerRequestService: PlayerRequestService,
         private cookieService: CookieService,
-        private route: Router) {
+        private route: Router
+    ) {
     }
 
     public loginUserName: string;
@@ -47,6 +48,7 @@ export class LoginComponent implements OnInit, OnDestroy {
                 var responseObject = response.ResponseObject as InheritResponse;
 
                 if (response.ResponseCode == 0) {
+                    localStorage.setItem("Id",responseObject.playerid.toString())
                     this.cookieService.putObject('token', responseObject.token);
                     this.cookieService.putObject('playerid', responseObject.playerid);
                     this.route.navigate(['desk']);

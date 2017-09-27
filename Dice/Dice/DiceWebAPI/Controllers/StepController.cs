@@ -1,7 +1,6 @@
 ﻿using Dice.Bll.Interfaces;
 using Dice.DTO;
 using DiceWebAPI.Models;
-using Microsoft.AspNet.SignalR;
 using Newtonsoft.Json;
 using System;
 using System.Web.Mvc;

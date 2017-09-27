@@ -10,7 +10,6 @@
             <PropertyRef Name="Id" />
           </Key>
           <Property Name="Id" Type="int" Nullable="false" />
-          <Property Name="Face" Type="int" Nullable="false" />
         </EntityType>
         <EntityType Name="Game">
           <Key>
@@ -60,7 +59,8 @@
           </Key>
           <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="GameId" Type="int" Nullable="false" />
-          <Property Name="IsFirstPlayerTurn" Type="bit" />
+          <Property Name="StartTime" Type="date" Nullable="false" />
+          <Property Name="EndTime" Type="date" />
         </EntityType>
         <EntityType Name="Step">
           <Key>
@@ -129,7 +129,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__Round__GameId__31EC6D26">
+        <Association Name="FK__Round__GameId__34C8D9D1">
           <End Role="Game" Type="Self.Game" Multiplicity="1" />
           <End Role="Round" Type="Self.Round" Multiplicity="*" />
           <ReferentialConstraint>
@@ -141,7 +141,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__Step__FirstDice__35BCFE0A">
+        <Association Name="FK__Step__FirstDice__38996AB5">
           <End Role="Dice" Type="Self.Dice" Multiplicity="1" />
           <End Role="Step" Type="Self.Step" Multiplicity="*" />
           <ReferentialConstraint>
@@ -153,7 +153,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__Step__RoundId__34C8D9D1">
+        <Association Name="FK__Step__RoundId__37A5467C">
           <End Role="Round" Type="Self.Round" Multiplicity="1" />
           <End Role="Step" Type="Self.Step" Multiplicity="*" />
           <ReferentialConstraint>
@@ -165,7 +165,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__Step__SecondDice__36B12243">
+        <Association Name="FK__Step__SecondDice__398D8EEE">
           <End Role="Dice" Type="Self.Dice" Multiplicity="1" />
           <End Role="Step" Type="Self.Step" Multiplicity="*" />
           <ReferentialConstraint>
@@ -202,19 +202,19 @@
             <End Role="Player" EntitySet="Player" />
             <End Role="PlayerSession" EntitySet="PlayerSession" />
           </AssociationSet>
-          <AssociationSet Name="FK__Round__GameId__31EC6D26" Association="Self.FK__Round__GameId__31EC6D26">
+          <AssociationSet Name="FK__Round__GameId__34C8D9D1" Association="Self.FK__Round__GameId__34C8D9D1">
             <End Role="Game" EntitySet="Game" />
             <End Role="Round" EntitySet="Round" />
           </AssociationSet>
-          <AssociationSet Name="FK__Step__FirstDice__35BCFE0A" Association="Self.FK__Step__FirstDice__35BCFE0A">
+          <AssociationSet Name="FK__Step__FirstDice__38996AB5" Association="Self.FK__Step__FirstDice__38996AB5">
             <End Role="Dice" EntitySet="Dice" />
             <End Role="Step" EntitySet="Step" />
           </AssociationSet>
-          <AssociationSet Name="FK__Step__RoundId__34C8D9D1" Association="Self.FK__Step__RoundId__34C8D9D1">
+          <AssociationSet Name="FK__Step__RoundId__37A5467C" Association="Self.FK__Step__RoundId__37A5467C">
             <End Role="Round" EntitySet="Round" />
             <End Role="Step" EntitySet="Step" />
           </AssociationSet>
-          <AssociationSet Name="FK__Step__SecondDice__36B12243" Association="Self.FK__Step__SecondDice__36B12243">
+          <AssociationSet Name="FK__Step__SecondDice__398D8EEE" Association="Self.FK__Step__SecondDice__398D8EEE">
             <End Role="Dice" EntitySet="Dice" />
             <End Role="Step" EntitySet="Step" />
           </AssociationSet>
@@ -232,11 +232,11 @@
           <EntitySet Name="Rounds" EntityType="DICEModel.Round" />
           <EntitySet Name="Steps" EntityType="DICEModel.Step" />
           <EntitySet Name="sysdiagrams" EntityType="DICEModel.sysdiagram" />
-          <AssociationSet Name="FK__Step__FirstDice__35BCFE0A" Association="DICEModel.FK__Step__FirstDice__35BCFE0A">
+          <AssociationSet Name="FK__Step__FirstDice__38996AB5" Association="DICEModel.FK__Step__FirstDice__38996AB5">
             <End Role="Dice" EntitySet="Dices" />
             <End Role="Step" EntitySet="Steps" />
           </AssociationSet>
-          <AssociationSet Name="FK__Step__SecondDice__36B12243" Association="DICEModel.FK__Step__SecondDice__36B12243">
+          <AssociationSet Name="FK__Step__SecondDice__398D8EEE" Association="DICEModel.FK__Step__SecondDice__398D8EEE">
             <End Role="Dice" EntitySet="Dices" />
             <End Role="Step" EntitySet="Steps" />
           </AssociationSet>
@@ -248,7 +248,7 @@
             <End Role="Player" EntitySet="Players" />
             <End Role="Game" EntitySet="Games" />
           </AssociationSet>
-          <AssociationSet Name="FK__Round__GameId__31EC6D26" Association="DICEModel.FK__Round__GameId__31EC6D26">
+          <AssociationSet Name="FK__Round__GameId__34C8D9D1" Association="DICEModel.FK__Round__GameId__34C8D9D1">
             <End Role="Game" EntitySet="Games" />
             <End Role="Round" EntitySet="Rounds" />
           </AssociationSet>
@@ -260,7 +260,7 @@
             <End Role="Player" EntitySet="Players" />
             <End Role="PlayerSession" EntitySet="PlayerSessions" />
           </AssociationSet>
-          <AssociationSet Name="FK__Step__RoundId__34C8D9D1" Association="DICEModel.FK__Step__RoundId__34C8D9D1">
+          <AssociationSet Name="FK__Step__RoundId__37A5467C" Association="DICEModel.FK__Step__RoundId__37A5467C">
             <End Role="Round" EntitySet="Rounds" />
             <End Role="Step" EntitySet="Steps" />
           </AssociationSet>
@@ -270,9 +270,8 @@
             <PropertyRef Name="Id" />
           </Key>
           <Property Name="Id" Type="Int32" Nullable="false" />
-          <Property Name="Face" Type="Int32" Nullable="false" />
-          <NavigationProperty Name="Steps" Relationship="DICEModel.FK__Step__FirstDice__35BCFE0A" FromRole="Dice" ToRole="Step" />
-          <NavigationProperty Name="Steps1" Relationship="DICEModel.FK__Step__SecondDice__36B12243" FromRole="Dice" ToRole="Step" />
+          <NavigationProperty Name="Steps" Relationship="DICEModel.FK__Step__FirstDice__38996AB5" FromRole="Dice" ToRole="Step" />
+          <NavigationProperty Name="Steps1" Relationship="DICEModel.FK__Step__SecondDice__398D8EEE" FromRole="Dice" ToRole="Step" />
         </EntityType>
         <EntityType Name="Game">
           <Key>
@@ -286,7 +285,7 @@
           <Property Name="EndTime" Type="DateTime" Precision="0" />
           <NavigationProperty Name="Player" Relationship="DICEModel.FK__Game__FirstPlaye__2B3F6F97" FromRole="Game" ToRole="Player" />
           <NavigationProperty Name="Player1" Relationship="DICEModel.FK__Game__SecondPlay__2C3393D0" FromRole="Game" ToRole="Player" />
-          <NavigationProperty Name="Rounds" Relationship="DICEModel.FK__Round__GameId__31EC6D26" FromRole="Game" ToRole="Round" />
+          <NavigationProperty Name="Rounds" Relationship="DICEModel.FK__Round__GameId__34C8D9D1" FromRole="Game" ToRole="Round" />
         </EntityType>
         <EntityType Name="Player">
           <Key>
@@ -331,9 +330,10 @@
           </Key>
           <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="GameId" Type="Int32" Nullable="false" />
-          <Property Name="IsFirstPlayerTurn" Type="Boolean" />
-          <NavigationProperty Name="Game" Relationship="DICEModel.FK__Round__GameId__31EC6D26" FromRole="Round" ToRole="Game" />
-          <NavigationProperty Name="Steps" Relationship="DICEModel.FK__Step__RoundId__34C8D9D1" FromRole="Round" ToRole="Step" />
+          <Property Name="StartTime" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="EndTime" Type="DateTime" Precision="0" />
+          <NavigationProperty Name="Game" Relationship="DICEModel.FK__Round__GameId__34C8D9D1" FromRole="Round" ToRole="Game" />
+          <NavigationProperty Name="Steps" Relationship="DICEModel.FK__Step__RoundId__37A5467C" FromRole="Round" ToRole="Step" />
         </EntityType>
         <EntityType Name="Step">
           <Key>
@@ -343,9 +343,9 @@
           <Property Name="RoundId" Type="Int32" Nullable="false" />
           <Property Name="FirstDice" Type="Int32" Nullable="false" />
           <Property Name="SecondDice" Type="Int32" Nullable="false" />
-          <NavigationProperty Name="Dice" Relationship="DICEModel.FK__Step__FirstDice__35BCFE0A" FromRole="Step" ToRole="Dice" />
-          <NavigationProperty Name="Dice1" Relationship="DICEModel.FK__Step__SecondDice__36B12243" FromRole="Step" ToRole="Dice" />
-          <NavigationProperty Name="Round" Relationship="DICEModel.FK__Step__RoundId__34C8D9D1" FromRole="Step" ToRole="Round" />
+          <NavigationProperty Name="Dice" Relationship="DICEModel.FK__Step__FirstDice__38996AB5" FromRole="Step" ToRole="Dice" />
+          <NavigationProperty Name="Dice1" Relationship="DICEModel.FK__Step__SecondDice__398D8EEE" FromRole="Step" ToRole="Dice" />
+          <NavigationProperty Name="Round" Relationship="DICEModel.FK__Step__RoundId__37A5467C" FromRole="Step" ToRole="Round" />
         </EntityType>
         <EntityType Name="sysdiagram">
           <Key>
@@ -357,7 +357,7 @@
           <Property Name="version" Type="Int32" />
           <Property Name="definition" Type="Binary" MaxLength="Max" FixedLength="false" />
         </EntityType>
-        <Association Name="FK__Step__FirstDice__35BCFE0A">
+        <Association Name="FK__Step__FirstDice__38996AB5">
           <End Type="DICEModel.Dice" Role="Dice" Multiplicity="1" />
           <End Type="DICEModel.Step" Role="Step" Multiplicity="*" />
           <ReferentialConstraint>
@@ -369,7 +369,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__Step__SecondDice__36B12243">
+        <Association Name="FK__Step__SecondDice__398D8EEE">
           <End Type="DICEModel.Dice" Role="Dice" Multiplicity="1" />
           <End Type="DICEModel.Step" Role="Step" Multiplicity="*" />
           <ReferentialConstraint>
@@ -405,7 +405,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__Round__GameId__31EC6D26">
+        <Association Name="FK__Round__GameId__34C8D9D1">
           <End Type="DICEModel.Game" Role="Game" Multiplicity="1" />
           <End Type="DICEModel.Round" Role="Round" Multiplicity="*" />
           <ReferentialConstraint>
@@ -441,7 +441,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__Step__RoundId__34C8D9D1">
+        <Association Name="FK__Step__RoundId__37A5467C">
           <End Type="DICEModel.Round" Role="Round" Multiplicity="1" />
           <End Type="DICEModel.Step" Role="Step" Multiplicity="*" />
           <ReferentialConstraint>
@@ -462,7 +462,6 @@
           <EntitySetMapping Name="Dices">
             <EntityTypeMapping TypeName="DICEModel.Dice">
               <MappingFragment StoreEntitySet="Dice">
-                <ScalarProperty Name="Face" ColumnName="Face" />
                 <ScalarProperty Name="Id" ColumnName="Id" />
               </MappingFragment>
             </EntityTypeMapping>
@@ -516,7 +515,8 @@
           <EntitySetMapping Name="Rounds">
             <EntityTypeMapping TypeName="DICEModel.Round">
               <MappingFragment StoreEntitySet="Round">
-                <ScalarProperty Name="IsFirstPlayerTurn" ColumnName="IsFirstPlayerTurn" />
+                <ScalarProperty Name="EndTime" ColumnName="EndTime" />
+                <ScalarProperty Name="StartTime" ColumnName="StartTime" />
                 <ScalarProperty Name="GameId" ColumnName="GameId" />
                 <ScalarProperty Name="Id" ColumnName="Id" />
               </MappingFragment>

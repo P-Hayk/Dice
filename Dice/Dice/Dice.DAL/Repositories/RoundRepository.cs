@@ -18,7 +18,7 @@ namespace Dice.DAL.Repositories
         public Round Add(Round round)
         {
             db.Rounds.Add(round);
-            db.SaveChanges();
+           
             return round;
         }
 

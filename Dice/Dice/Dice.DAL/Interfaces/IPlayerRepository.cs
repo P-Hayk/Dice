@@ -11,6 +11,6 @@ namespace Dice.DAL.Interfaces
         Player Add(Player player);
         Player Get(string userName);
 
-        Player Get(int id);
+
     }
 }

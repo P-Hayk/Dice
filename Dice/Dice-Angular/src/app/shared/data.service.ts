@@ -4,18 +4,15 @@ import { Observable, Subject } from "rxjs";
 
 @Injectable()
 export class DataService {
-    private _value:any;
-    constructor() {
-       
-    }
 
+    private _value: any;
 
     public value() {
         return this._value
     }
     public setValue(v) {
-     
-        this._value=v;
+
+        this._value = v;
     }
 
 }
