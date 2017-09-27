@@ -10,6 +10,7 @@ using System.Web.Mvc;
 namespace DiceWebAPI.Controllers
 {
     //[EnableCors(origins: "*", headers: "*", methods: "*")]
+    [Authorization]
     public class MainController : ApiController
     {
 

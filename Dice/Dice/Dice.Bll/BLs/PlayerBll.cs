@@ -71,7 +71,7 @@ namespace Dice.Bll.BLs
             if (player == null)
                 throw new DiceException("UserNotFound");
 
-            if (player.PasswordHash != input.Password)
+            if (player.PasswordHash != input.PasswordHash)
                 throw new DiceException("WrongUserName");
 
             int playerid=unitOfWork.PlayerSessionRepo.DeleteAllPlayerSessions(player.Id);

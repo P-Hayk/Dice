@@ -34,13 +34,15 @@ export class LoginComponent implements OnInit, OnDestroy {
         let data =
             {
                 UserName: this.loginUserName,
-                Password: this.loginPass
+                PasswordHash: this.loginPass
             }
-        this.cookieService.putObject('login', data);
+        this.cookieService.putObject('form', data);
         this.cookieService.put('method', StatusMethod.LoginPlayer.toString());
 
         this.PlayerRequestService.loginPlayer(data).subscribe(
             result => {
+                console.log("---------------------------");
+                console.log(result);
                 this.ClearCookie();
                 this.loginError = false;
                 var response: BaseResponse = result as BaseResponse;
@@ -55,6 +57,7 @@ export class LoginComponent implements OnInit, OnDestroy {
                     this.route.navigate(['login']);
                 
             }, error => {
+                console.log("mtav error");
                 this.ClearCookie();
 
                 this.loginError = true;
@@ -66,7 +69,7 @@ export class LoginComponent implements OnInit, OnDestroy {
         this.loginPass = null;
     }
     ClearCookie() {
-        this.cookieService.remove('login');
+        this.cookieService.remove('form');
         this.cookieService.remove('method');
     }
 }

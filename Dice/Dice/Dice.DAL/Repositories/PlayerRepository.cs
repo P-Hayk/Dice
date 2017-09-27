@@ -30,6 +30,7 @@ namespace Dice.DAL.Repositories
 
         public Player Get(string userName)
         {
+            List<Player> a = db.Players.ToList();
             Player player=db.Players.FirstOrDefault(x => x.UserName == userName);
             return player;
         }

@@ -5,22 +5,22 @@
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
       <Diagram DiagramId="cae279b9f4a043418166a8279f740d70" Name="Diagram1">
-        <EntityTypeShape EntityType="DICEModel.Dice" Width="1.5" PointX="6.875" PointY="1.375" />
-        <EntityTypeShape EntityType="DICEModel.Game" Width="1.5" PointX="4.625" PointY="3.875" />
-        <EntityTypeShape EntityType="DICEModel.Player" Width="1.5" PointX="2.375" PointY="3.875" />
-        <EntityTypeShape EntityType="DICEModel.PlayerCommon" Width="1.5" PointX="4.625" PointY="7.375" />
-        <EntityTypeShape EntityType="DICEModel.PlayerSession" Width="1.5" PointX="4.625" PointY="1" />
-        <EntityTypeShape EntityType="DICEModel.Round" Width="1.5" PointX="6.875" PointY="4.25" />
-        <EntityTypeShape EntityType="DICEModel.Step" Width="1.5" PointX="10" PointY="4.25" />
-        <EntityTypeShape EntityType="DICEModel.sysdiagram" Width="1.5" PointX="9.375" PointY="0.5" />
-        <AssociationConnector Association="DICEModel.FK__Step__FirstDice__35BCFE0A" />
-        <AssociationConnector Association="DICEModel.FK__Step__SecondDice__36B12243" />
-        <AssociationConnector Association="DICEModel.FK__Game__FirstPlaye__2B3F6F97" />
-        <AssociationConnector Association="DICEModel.FK__Game__SecondPlay__2C3393D0" />
-        <AssociationConnector Association="DICEModel.FK__Round__GameId__31EC6D26" />
-        <AssociationConnector Association="DICEModel.FK__PlayerCom__Playe__286302EC" />
-        <AssociationConnector Association="DICEModel.FK__PlayerSes__Playe__25869641" />
-        <AssociationConnector Association="DICEModel.FK__Step__RoundId__34C8D9D1" />
+        <EntityTypeShape EntityType="DICEModel.Dice" Width="1.5" PointX="10.75" PointY="1.75" />
+        <EntityTypeShape EntityType="DICEModel.Game" Width="1.5" PointX="3" PointY="1.25" />
+        <EntityTypeShape EntityType="DICEModel.Player" Width="1.5" PointX="0.75" PointY="4.125" />
+        <EntityTypeShape EntityType="DICEModel.PlayerCommon" Width="1.5" PointX="3" PointY="7.625" />
+        <EntityTypeShape EntityType="DICEModel.PlayerSession" Width="1.5" PointX="3" PointY="4.75" />
+        <EntityTypeShape EntityType="DICEModel.Round" Width="1.5" PointX="5.25" PointY="1.625" />
+        <EntityTypeShape EntityType="DICEModel.Step" Width="1.5" PointX="7.5" PointY="1.5" />
+        <EntityTypeShape EntityType="DICEModel.sysdiagram" Width="1.5" PointX="7.75" PointY="4.75" />
+        <AssociationConnector Association="DICEModel.FK__Step__FirstDice__73BA3083" />
+        <AssociationConnector Association="DICEModel.FK__Step__SecondDice__74AE54BC" />
+        <AssociationConnector Association="DICEModel.FK__Game__FirstPlaye__534D60F1" />
+        <AssociationConnector Association="DICEModel.FK__Game__SecondPlay__5441852A" />
+        <AssociationConnector Association="DICEModel.FK__Round__GameId__6FE99F9F" />
+        <AssociationConnector Association="DICEModel.FK__PlayerCom__Playe__4D94879B" />
+        <AssociationConnector Association="DICEModel.FK__PlayerSes__Playe__5070F446" />
+        <AssociationConnector Association="DICEModel.FK__Step__RoundId__72C60C4A" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>
