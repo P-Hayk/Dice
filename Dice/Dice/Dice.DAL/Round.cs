@@ -22,7 +22,8 @@ namespace Dice.DAL
     
         public int Id { get; set; }
         public int GameId { get; set; }
-        public Nullable<bool> IsFirstPlayerTurn { get; set; }
+        public System.DateTime StartTime { get; set; }
+        public Nullable<System.DateTime> EndTime { get; set; }
     
         public virtual Game Game { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]

@@ -53,7 +53,9 @@ Face int NOT NULL UNIQUE
 CREATE TABLE Round(
 Id int IDENTITY NOT NULL PRIMARY KEY,
 GameId int NOT NULL REFERENCES Game,
-IsFirstPlayerTurn bit
+StartTime date NOT NULL,
+EndTime date 
+
 )
 
 
