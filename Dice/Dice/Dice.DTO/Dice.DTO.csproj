@@ -46,6 +46,7 @@
     <Compile Include="PlayerCommonDTO.cs" />
     <Compile Include="PlayerDTO.cs" />
     <Compile Include="PlayerSessionDTO.cs" />
+    <Compile Include="RoundDTO.cs" />
     <Compile Include="StepDTO.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

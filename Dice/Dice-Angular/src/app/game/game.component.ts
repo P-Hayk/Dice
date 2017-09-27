@@ -20,7 +20,7 @@ export class GameComponent implements OnInit {
 
   ) {
     this.SignalRService.Connection.then(x => {
-      x.listenFor('game1').subscribe(x => { this.game = x; });
+      x.listenFor('game1').subscribe(x => { this.game = x; });      
       x.listenFor('animate').subscribe(x => {
         this.test(x);
       });
@@ -42,7 +42,6 @@ export class GameComponent implements OnInit {
 
     this.stepRequest.roleDice(data).subscribe(x => {
 
-      this.animateDice(x.ResponseObject.FirstDice, x.ResponseObject.SecondDice)
     });
 
 
@@ -55,6 +54,7 @@ export class GameComponent implements OnInit {
     setTimeout(() => { this.firstdice = `dice_${x}`; this.secondice = `dice_${y}` }, 800);
   }
   test(x) {
+    console.log(x)
     this.animateDice(x.FirstDice, x.SecondDice);
   }
 }

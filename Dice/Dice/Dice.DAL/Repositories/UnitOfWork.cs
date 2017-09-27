@@ -15,6 +15,7 @@ namespace Dice.DAL.Repositories
         private IDiceRepository diceRepo;
         private IPlayerSessionRepository playerSessionRepo;
         private IPlayerCommonRepository playerCommonRepo;
+        private IRoundRepository roundRepo;
         private DICEEntities db;
 
         private bool disposed = false;
@@ -84,6 +85,17 @@ namespace Dice.DAL.Repositories
                 if (stepRepo == null)
                     stepRepo = new StepRepository(db);
                 return stepRepo;
+            }
+
+        }
+
+        public IRoundRepository RoundRepo
+        {
+            get
+            {
+                if (roundRepo == null)
+                    roundRepo = new RoundRepository(db);
+                return roundRepo;
             }
 
         }

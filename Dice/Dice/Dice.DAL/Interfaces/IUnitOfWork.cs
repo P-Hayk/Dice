@@ -13,6 +13,7 @@ namespace Dice.DAL.Interfaces
         IDiceRepository DiceRepo { get; }
         IPlayerSessionRepository PlayerSessionRepo { get; }
         IStepRepository StepRepo { get; }
+        IRoundRepository RoundRepo { get; }
         void Save();
     }
 }

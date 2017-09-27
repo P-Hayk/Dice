@@ -32,6 +32,7 @@ namespace DiceWebAPI.Util
             kernel.Bind<IPlayerSessionBll>().To<PlayerSessionBll>().InRequestScope();
             kernel.Bind<IGameBll>().To<GameBll>().InRequestScope();
             kernel.Bind<IStepBll>().To<StepBll>().InRequestScope();
+            kernel.Bind<IRoundBll>().To<RoundBll>().InRequestScope();
         }
     }
 }

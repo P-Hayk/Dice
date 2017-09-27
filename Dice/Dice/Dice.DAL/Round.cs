@@ -12,24 +12,20 @@ namespace Dice.DAL
     using System;
     using System.Collections.Generic;
     
-    public partial class Game
+    public partial class Round
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        public Game()
+        public Round()
         {
-            this.Rounds = new HashSet<Round>();
+            this.Steps = new HashSet<Step>();
         }
     
         public int Id { get; set; }
-        public int FirstPlayerId { get; set; }
-        public Nullable<int> SecondPlayerId { get; set; }
-        public System.DateTime CreateTime { get; set; }
-        public Nullable<System.DateTime> StartTime { get; set; }
-        public Nullable<System.DateTime> EndTime { get; set; }
+        public int GameId { get; set; }
+        public Nullable<bool> IsFirstPlayerTurn { get; set; }
     
-        public virtual Player Player { get; set; }
-        public virtual Player Player1 { get; set; }
+        public virtual Game Game { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Round> Rounds { get; set; }
+        public virtual ICollection<Step> Steps { get; set; }
     }
 }

@@ -13,7 +13,7 @@ export class PlayerRequestService {
 
     loginPlayer(data: any) {
 
-        let request = this.prepairRequest(data, StatusMethod.LoginPlayer);
+        let request = this.prepairRequest(data, "LoginPlayer");
 
         return this.ApiRequestService.Request(request);
     }
@@ -22,7 +22,7 @@ export class PlayerRequestService {
         return this.ApiRequestService.Request(request);
     }
 
-    private prepairRequest(data: any, method: number) {
+    private prepairRequest(data: any, method: any) {
 
         let body = {
             Controller: Controller,

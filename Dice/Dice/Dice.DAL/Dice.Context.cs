@@ -30,6 +30,7 @@ namespace Dice.DAL
         public virtual DbSet<Player> Players { get; set; }
         public virtual DbSet<PlayerCommon> PlayerCommons { get; set; }
         public virtual DbSet<PlayerSession> PlayerSessions { get; set; }
+        public virtual DbSet<Round> Rounds { get; set; }
         public virtual DbSet<Step> Steps { get; set; }
         public virtual DbSet<sysdiagram> sysdiagrams { get; set; }
     }

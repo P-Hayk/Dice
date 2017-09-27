@@ -21,7 +21,6 @@ namespace Dice.DAL
             this.Games1 = new HashSet<Game>();
             this.PlayerCommons = new HashSet<PlayerCommon>();
             this.PlayerSessions = new HashSet<PlayerSession>();
-            this.Steps = new HashSet<Step>();
         }
     
         public int Id { get; set; }
@@ -39,7 +38,5 @@ namespace Dice.DAL
         public virtual ICollection<PlayerCommon> PlayerCommons { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<PlayerSession> PlayerSessions { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Step> Steps { get; set; }
     }
 }

@@ -1,10 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-namespace Dice.DTO
-
+﻿namespace Dice.DTO
 {
     public class StepDTO
     {
@@ -13,6 +7,6 @@ namespace Dice.DTO
         public int PlayerId { get; set; }
         public int FirstDice { get; set; }
         public int SecondDice { get; set; }
-        public int RoundId { get; set; }
+        
     }
 }

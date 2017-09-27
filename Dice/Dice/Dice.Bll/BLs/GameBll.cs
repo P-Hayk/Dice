@@ -4,6 +4,7 @@ using Dice.DAL.Interfaces;
 using Dice.DTO;
 using Ninject;
 using System;
+using System.Collections.Generic;
 
 namespace Dice.Bll.BLs
 {
@@ -15,11 +16,14 @@ namespace Dice.Bll.BLs
 
         public GameDTO AddGame(GameDTO gameDTO)
         {
-            Game game = new Game { FirstPlayerId = gameDTO.FirstPlayerID };
+            Game game = new Game
+            {
+                FirstPlayerId = gameDTO.FirstPlayerID                 
+            };
             game.StartTime = DateTime.Now;
             game.EndTime = DateTime.Now;
 
-            game =  unitOfWork.GameRepo.AddGame(game);
+            game = unitOfWork.GameRepo.AddGame(game);
             gameDTO.Id = game.Id;
             gameDTO.SecondPlayerID = game.SecondPlayerId;
             return gameDTO;

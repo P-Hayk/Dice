@@ -15,15 +15,12 @@ namespace Dice.DAL
     public partial class Step
     {
         public int Id { get; set; }
-        public int GameId { get; set; }
-        public int PlayerId { get; set; }
+        public int RoundId { get; set; }
         public int FirstDice { get; set; }
         public int SecondDice { get; set; }
-        public int RoundId { get; set; }
     
         public virtual Dice Dice { get; set; }
         public virtual Dice Dice1 { get; set; }
-        public virtual Game Game { get; set; }
-        public virtual Player Player { get; set; }
+        public virtual Round Round { get; set; }
     }
 }

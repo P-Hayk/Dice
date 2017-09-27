@@ -67,6 +67,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="BLs\BaseBll.cs" />
+    <Compile Include="BLs\RoundBll.cs" />
     <Compile Include="DiceExeption.cs" />
     <Compile Include="Infrastructre\BLsModule.cs" />
     <Compile Include="Interfaces\IBaseBll.cs" />
@@ -74,6 +75,7 @@
     <Compile Include="Interfaces\IGameBll.cs" />
     <Compile Include="Interfaces\IPlayerBll.cs" />
     <Compile Include="Interfaces\IPlayerSessionBll.cs" />
+    <Compile Include="Interfaces\IRoundBll.cs" />
     <Compile Include="Interfaces\IStepBll.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="BLs\DiceBll.cs" />
